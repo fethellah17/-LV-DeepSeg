@@ -555,178 +555,189 @@
 
   /* ══════════════════════════════════════════════════════════════════ */
   /* ── MOBILE RESPONSIVE STYLES (< 768px) ─────────────────────────── */
+  /* ── RESPONSIVE FLEX LAYOUT: Native mobile app experience ────────── */
   /* ══════════════════════════════════════════════════════════════════ */
   @media (max-width: 767px) {
-    /* ── SLIDE 1: DEFENSE HERO LAYOUT ── */
-    .defense-hero {
+    /* ── SLIDE 1: DEFENSE SLIDE BODY ── */
+    #s1 .defense-slide-body {
+      padding: 10px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: auto;
+      min-height: calc(100vh - 80px);
+    }
+    
+    /* ── HERO SECTION: STACKING LAYOUT ── */
+    #s1 .defense-hero {
       flex-direction: column;
-      gap: 20px;
       align-items: center;
-      text-align: center;
+      gap: 15px;
+      margin-bottom: 15px;
     }
     
-    .defense-hero-left {
-      width: 80%;
-      order: -1; /* Image on top */
+    /* ── IMAGE: TOP, CENTERED, FIXED SIZE ── */
+    #s1 .defense-hero-left {
+      width: 200px;
+      order: -1;
     }
     
-    .defense-hero-right {
+    #s1 .defense-title-image {
+      width: 200px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+    
+    /* ── TITLE: BELOW IMAGE, CENTERED ── */
+    #s1 .defense-hero-right {
       flex: 1;
       width: 100%;
+      text-align: center;
     }
     
-    .defense-title-image {
-      width: 100%;
-      max-width: 280px;
-      margin: 0 auto;
-    }
-    
-    .defense-eyebrow {
+    #s1 .defense-eyebrow {
       text-align: center;
       font-size: 10px;
+      margin-bottom: 10px;
     }
     
-    .defense-title {
-      font-size: clamp(18px, 5vw, 24px);
-      line-height: 1.3;
+    #s1 .defense-title {
+      font-size: 1.2rem;
+      line-height: 1.4;
       text-align: center;
     }
     
-    /* ── SLIDE 1: DEFENSE SLIDE BODY ── */
-    .defense-slide-body {
-      padding: 20px 16px;
-      justify-content: flex-start;
+    /* ── INSTITUTION BLOCK ── */
+    #s1 .defense-transition {
+      padding: 10px 0;
+      margin-bottom: 15px;
     }
     
-    /* ── SLIDE 1: INSTITUTION BLOCK ── */
-    .defense-transition {
-      padding: 12px 0;
-      margin-bottom: 20px;
-    }
-    
-    .defense-institution-block {
+    #s1 .defense-institution-block {
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
+    }
+    
+    #s1 .defense-logo {
+      height: 45px;
+    }
+    
+    #s1 .defense-institution-text {
       text-align: center;
     }
     
-    .defense-logo {
-      height: 50px;
-    }
-    
-    .defense-institution {
+    #s1 .defense-institution {
       font-size: 11px;
       line-height: 1.4;
     }
     
-    .defense-specialty {
-      font-size: 10.5px;
+    #s1 .defense-specialty {
+      font-size: 10px;
     }
     
-    /* ── SLIDE 1: FOOTER SECTION ── */
-    .defense-footer {
-      padding: 20px 16px;
+    /* ── FOOTER: VERTICAL STACKING ── */
+    #s1 .defense-footer {
+      padding: 15px 10px;
       border-top: 1px solid #e5e5e5;
     }
     
-    .defense-footer-section {
+    #s1 .defense-footer-section {
       flex-direction: column;
-      gap: 24px;
+      gap: 10px;
       width: 100%;
     }
     
-    .defense-footer-col {
-      grid-template-columns: 1fr;
+    #s1 .defense-footer-col {
+      display: flex;
+      flex-direction: column;
       gap: 8px;
       width: 100%;
     }
     
-    .defense-footer-item {
+    #s1 .defense-footer-label {
+      text-align: center;
+      margin-bottom: 5px;
+      font-size: 10px;
+    }
+    
+    #s1 .defense-footer-item {
       display: flex;
       flex-direction: column;
       gap: 2px;
       text-align: center;
     }
     
-    .defense-footer-label {
-      text-align: center;
-      margin-bottom: 8px;
-    }
-    
-    .defense-name {
-      font-size: 12px;
-      text-align: center;
-    }
-    
-    .defense-role {
+    #s1 .defense-name {
       font-size: 11.5px;
       text-align: center;
     }
     
-    /* ── GLOBAL: HEADER & FOOTER ── */
-    .slide-header {
-      padding: 10px 16px;
-    }
-    
-    .logo-text {
-      font-size: 11px;
-    }
-    
-    .logo-dot {
-      width: 8px;
-      height: 8px;
-    }
-    
-    .slide-counter {
-      font-size: 10px;
-    }
-    
-    .slide-footer {
-      padding: 8px 16px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    
-    .footer-uni {
-      font-size: 9px;
-      width: 100%;
+    #s1 .defense-role {
+      font-size: 10.5px;
       text-align: center;
     }
     
-    /* ── NAVIGATION ARROWS: MOBILE POSITIONING ── */
+    /* ── GLOBAL: HEADER & FOOTER BAR ── */
+    .slide-header {
+      padding: 8px 12px;
+      flex-shrink: 0;
+    }
+    
+    .logo-text {
+      font-size: 10px;
+    }
+    
+    .logo-dot {
+      width: 7px;
+      height: 7px;
+    }
+    
+    .slide-counter {
+      font-size: 9px;
+    }
+    
+    .slide-footer {
+      padding: 8px 12px;
+      flex-shrink: 0;
+    }
+    
+    .footer-uni {
+      font-size: 8.5px;
+    }
+    
+    /* ── NAVIGATION ARROWS: FIXED POSITION ── */
     .footer-nav {
       position: fixed;
-      bottom: 12px;
-      right: 12px;
+      bottom: 10px;
+      right: 10px;
       z-index: 1000;
       display: flex;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 4px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.97);
+      padding: 6px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
     
     .nav-btn {
-      width: 40px;
-      height: 40px;
-      font-size: 16px;
+      width: 44px;
+      height: 44px;
+      font-size: 18px;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
     }
     
     .progress-bar {
-      margin: 0;
-      width: 100%;
+      display: none;
     }
     
-    /* ── SLIDE BODY (General) ── */
+    /* ── SLIDE BODY (General - for other slides) ── */
     .slide-body {
-      padding: 20px 16px 16px;
+      padding: 12px;
     }
     
     .title-slide-body {
-      padding: 0 16px;
+      padding: 0 12px;
     }
   }
 </style>
