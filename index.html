@@ -561,18 +561,20 @@
     /* ── SLIDE 1: DEFENSE SLIDE BODY ── */
     #s1 .defense-slide-body {
       padding: 10px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      height: auto;
-      min-height: calc(100vh - 80px);
+      overflow: hidden;
+      height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     
     /* ── HERO SECTION: STACKING LAYOUT ── */
     #s1 .defense-hero {
       flex-direction: column;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
+      gap: 12px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
     }
     
     /* ── IMAGE: TOP, CENTERED, FIXED SIZE ── */
@@ -590,7 +592,7 @@
     
     /* ── TITLE: BELOW IMAGE, CENTERED ── */
     #s1 .defense-hero-right {
-      flex: 1;
+      flex: 0 0 auto;
       width: 100%;
       text-align: center;
     }
@@ -598,24 +600,25 @@
     #s1 .defense-eyebrow {
       text-align: center;
       font-size: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     
     #s1 .defense-title {
       font-size: 1.2rem;
-      line-height: 1.4;
+      line-height: 1.35;
       text-align: center;
     }
     
-    /* ── INSTITUTION BLOCK ── */
+    /* ── INSTITUTION BLOCK: REDUCED SPACING ── */
     #s1 .defense-transition {
-      padding: 10px 0;
-      margin-bottom: 15px;
+      padding: 8px 0;
+      margin-bottom: 10px;
+      flex-shrink: 0;
     }
     
     #s1 .defense-institution-block {
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
     
     #s1 .defense-logo {
@@ -627,54 +630,61 @@
     }
     
     #s1 .defense-institution {
-      font-size: 11px;
-      line-height: 1.4;
+      font-size: 10.5px;
+      line-height: 1.35;
     }
     
     #s1 .defense-specialty {
-      font-size: 10px;
+      font-size: 9.5px;
     }
     
-    /* ── FOOTER: VERTICAL STACKING ── */
+    /* ── FOOTER: TWO-COLUMN GRID (SIDE-BY-SIDE) ── */
     #s1 .defense-footer {
-      padding: 15px 10px;
+      padding: 12px 10px;
       border-top: 1px solid #e5e5e5;
+      flex-shrink: 0;
     }
     
     #s1 .defense-footer-section {
-      flex-direction: column;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
       width: 100%;
     }
     
     #s1 .defense-footer-col {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       width: 100%;
+      align-items: center;
     }
     
     #s1 .defense-footer-label {
       text-align: center;
-      margin-bottom: 5px;
-      font-size: 10px;
+      margin-bottom: 4px;
+      font-size: 9.5px;
+      align-self: center;
     }
     
     #s1 .defense-footer-item {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 1px;
       text-align: center;
+      width: 100%;
     }
     
     #s1 .defense-name {
-      font-size: 11.5px;
+      font-size: 10.5px;
       text-align: center;
+      line-height: 1.3;
     }
     
     #s1 .defense-role {
-      font-size: 10.5px;
+      font-size: 9.5px;
       text-align: center;
+      line-height: 1.3;
     }
     
     /* ── GLOBAL: HEADER & FOOTER BAR ── */
@@ -705,13 +715,13 @@
       font-size: 8.5px;
     }
     
-    /* ── NAVIGATION ARROWS: FIXED POSITION ── */
+    /* ── NAVIGATION ARROWS: IPHONE FIX ── */
     .footer-nav {
-      position: fixed;
-      bottom: 10px;
-      right: 10px;
-      z-index: 1000;
-      display: flex;
+      position: fixed !important;
+      bottom: 85px !important;
+      right: 20px !important;
+      z-index: 9999 !important;
+      display: flex !important;
       gap: 8px;
       background: rgba(255, 255, 255, 0.97);
       padding: 6px;
