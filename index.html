@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LV-DeepSeg — Master Thesis Defense</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <nav class="nav-bar">
+    <div class="nav-logo">LV-DeepSeg</div>
+    <div class="nav-progress-wrap"><div class="nav-progress" id="progressBar"></div></div>
+    <div class="nav-counter" id="slideCounter">1 / 25</div>
+    <button class="nav-fullscreen-btn" id="fullscreenBtn" aria-label="Toggle fullscreen" title="Fullscreen (F)">
+      <svg id="fsIconEnter" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+      <svg id="fsIconExit" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
+    </button>
+  </nav>
+
+  <div class="nav-side">
+    <div class="nav-dots" id="navDots"></div>
+    <div class="nav-arrows">
+      <button class="nav-btn" id="prevBtn" aria-label="Previous slide">&#8593;</button>
+      <button class="nav-btn" id="nextBtn" aria-label="Next slide">&#8595;</button>
+    </div>
+  </div>
+
+  <main class="presentation" id="presentation">
+
+<section class="slide slide-title-page visible" id="slide-1" data-slide="1">
+  <div class="slide-inner">
+    <div class="slide-1-content">
+      <!-- Two-Column Layout - Phase 1 Animation -->
+      <div class="slide-1-two-column slide-1-anim-phase1">
+        <!-- Left Column: Image -->
+        <div class="slide-1-left-column">
+          <img src="assets/images/slide_1.png" alt="Left Ventricle Echocardiography" class="slide-1-main-image">
+        </div>
+
+        <!-- Right Column: Header + Title -->
+        <div class="slide-1-right-column">
+          <div class="slide-1-header">Master's Thesis Defense — 2026</div>
+          <h1 class="slide-1-title">
+            Combined Deep Learning Pipeline for Fully Automatic 
+            <span class="slide-1-title-highlight">Classification</span> and 
+            <span class="slide-1-title-highlight">Segmentation</span> 
+            of the Left Ventricle in Echocardiography
+          </h1>
+        </div>
+      </div>
+
+      <!-- University Section (Center-aligned) - Phase 2 Animation -->
+      <div class="slide-1-university-section slide-1-anim-phase2">
+        <img src="assets/images/logo_univ.png" alt="University Logo" class="slide-1-logo">
+        <div class="slide-1-university-text">
+          <div class="slide-1-university-name">Aboubakr Belkaïd University – Tlemcen – Faculty of Technology</div>
+          <div class="slide-1-specialty">Specialty: Biomedical &amp; Hospital Informatics</div>
+        </div>
+      </div>
+
+      <!-- Footer Tables - Phase 3 Animation -->
+      <div class="slide-1-footer slide-1-anim-phase3">
+        <table class="slide-1-table">
+          <tbody>
+            <tr>
+              <td class="slide-1-table-header">Students</td>
+              <td class="slide-1-table-content">
+                <div class="slide-1-person"><div class="slide-1-name">Hadj-bouziane Fethellah</div><div class="slide-1-subtitle">Biomedical &amp; Hospital Informatics</div></div>
+                <div class="slide-1-person"><div class="slide-1-name">Kertali Sohaib</div><div class="slide-1-subtitle">Biomedical &amp; Hospital Informatics</div></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="slide-1-table">
+          <tbody>
+            <tr>
+              <td class="slide-1-table-header">Jury Members</td>
+              <td class="slide-1-table-content">
+                <div class="slide-1-person"><div class="slide-1-name">Mr. Boukli Hacene Ismail</div><div class="slide-1-role">President</div></div>
+                <div class="slide-1-person"><div class="slide-1-name">Mss. Belarouci Sara</div><div class="slide-1-role">Examinator</div></div>
+                <div class="slide-1-person"><div class="slide-1-name">Mr. Gaouar Adil</div><div class="slide-1-role">Supervisor</div></div>
+                <div class="slide-1-person"><div class="slide-1-name">Mr. Meziane Abdelfettah</div><div class="slide-1-role">Co-Supervisor</div></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-2" data-slide="2">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Outline</span>
+    <h2 class="slide-title">Presentation Structure</h2>
+    </div>
+    <div class="slide-body">
+    <ol class="outline-list">
+  <li>Introduction and Motivation</li>
+  <li>Problem Statement</li>
+  <li>Datasets</li>
+  <li>Data Normalization and Preparation</li>
+  <li>Model Architectures</li>
+  <li>Justification for the UNet++ Hybrid Architecture</li>
+  <li>Training Configuration and Metrics</li>
+  <li>Results</li>
+  <li>Application &mdash; LV-DeepSeg</li>
+  <li>Conclusion, Limitations, and Future Directions</li>
+</ol>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-3" data-slide="3">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Introduction</span>
+    <h2 class="slide-title">Introduction and Motivation</h2>
+    <p class="slide-subtitle">Cardiovascular AI for echocardiographic analysis</p>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div class="condition-cards">
+    <div class="card stat-card"><div class="stat-value">17.9M</div><div class="stat-label">Annual deaths from cardiovascular diseases (WHO)</div></div>
+    <div class="card"><div class="card-icon">&#9829;</div><h3>Normal</h3><p>Healthy left ventricular function</p></div>
+    <div class="card"><div class="card-icon">&#9888;</div><h3>HFrEF</h3><p>Heart Failure with Reduced Ejection Fraction (EF &le; 40%)</p></div>
+    <div class="card"><div class="card-icon">&#9632;</div><h3>LVH / HCM</h3><p>Left Ventricular Hypertrophy / Hypertrophic Cardiomyopathy (IVSd &gt; 1.1 cm)</p></div>
+  </div>
+  <div>
+    <ul class="bullet-list">
+      <li>Cardiovascular diseases are the leading cause of death worldwide &mdash; WHO reports 17.9 million deaths per year.</li>
+      <li>Echocardiography (cardiac ultrasound) is the primary non-invasive imaging tool for diagnosing left ventricular conditions.</li>
+      <li>Manual analysis is time-consuming, operator-dependent, and produces significant inter-observer variability.</li>
+      <li>Three cardiac conditions are targeted: Normal, HFrEF, and LVH/HCM.</li>
+      <li>These three conditions are encountered daily in Algerian cardiology departments, including CHU Oran.</li>
+      <li>Automated deep learning analysis can accelerate diagnosis, reduce human error, and provide explainable clinical reports.</li>
+    </ul>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-4" data-slide="4">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Problem Statement</span>
+    <h2 class="slide-title">Problem Statement and Research Questions</h2>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div>
+    <h3>Four Core Research Questions</h3>
+    <ul class="bullet-list">
+      <li>How can a single deep learning pipeline simultaneously classify a cardiac condition (3 classes) AND precisely segment the left ventricle from 2D echocardiographic frames?</li>
+      <li>Can competitive performance be achieved using ImageNet-pretrained backbones fine-tuned on heterogeneous echocardiographic data, without domain-specific medical pretraining?</li>
+      <li>Which architecture &mdash; transformer-based or convolutional &mdash; generalizes more effectively across three heterogeneous datasets?</li>
+    </ul>
+  </div>
+  <div>
+    <h3>Four Contributions</h3>
+    <div class="contrib-cards">
+    <div class="card"><h3>1. Unified Classification</h3><p>A unified three-class classification framework trained on EchoNet-Dynamic, EchoNet-LVH, and CAMUS simultaneously.</p></div>
+    <div class="card"><h3>2. Simultaneous Segmentation</h3><p>Simultaneous LV Cavity and LV Wall segmentation with a transformer-encoder UNet++ using a three-class unified decoder.</p></div>
+    <div class="card"><h3>3. XAI Explainability</h3><p>A complete XAI explainability analysis (Grad-CAM++ and Attention Rollout) for all six classifiers.</p></div>
+    <div class="card"><h3>4. LV-DeepSeg Application</h3><p>A clinical desktop application with integrated LLM report generation via the Anthropic Claude API.</p></div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-5" data-slide="5">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Datasets</span>
+    <h2 class="slide-title">Dataset Sources &mdash; Overview</h2>
+    </div>
+    <div class="slide-body">
+    <div class="table-wrap">
+<table>
+<thead><tr><th>Dataset</th><th>Source</th><th>Format</th><th>Content</th><th>Scale</th><th>Labels Used</th><th>Task</th></tr></thead>
+<tbody>
+<tr><td>EchoNet-Dynamic</td><td>Stanford University (public)</td><td>AVI video + FileList.csv + VolumeTracings.csv</td><td>Apical 4-chamber cine loops</td><td>10,030 patients</td><td>EF value &mdash; Normal (EF &ge; 55%) or HFrEF (EF &le; 40%). Grey zone 40&ndash;54% excluded.</td><td>Classification + Segmentation (LV Cavity only)</td></tr>
+<tr><td>EchoNet-LVH</td><td>Stanford University (public)</td><td>AVI video + MeasurementsList.csv (Batch 1&ndash;4)</td><td>Parasternal long-axis views</td><td>~12,000 labeled frames extracted</td><td>IVSd &gt; 1.1 cm or LVPWd &gt; 1.1 cm &rarr; LVH/HCM label</td><td>Classification only</td></tr>
+<tr><td>CAMUS</td><td>CREATIS Lab, INSA Lyon (public)</td><td>NIfTI (.nii.gz) + official split TXT files</td><td>Apical 2CH and 4CH at ED and ES phases</td><td>500 patients &times; 4 frames = 2,000 frames</td><td>Expert manual contours: BG=0, LV Cavity=1, LV Myocardium=2, LA=3 (remapped to 0)</td><td>Segmentation (LV Cavity + LV Wall)</td></tr>
+<tr><td>CHU Oran (local)</td><td>Cardiology Dept., CHU Oran, Algeria</td><td>Digital echo images</td><td>Local clinical acquisitions</td><td>Used as independent validation set</td><td>Authorized by Prof. N. Laredj Ep. Abdelmalek on January 29, 2026</td><td>Independent clinical validation</td></tr>
+</tbody>
+</table>
+</div>
+<ul class="bullet-list" style="margin-top:20px;">
+  <li>EchoNet-Dynamic grey zone (EF 40&ndash;54%) was excluded to avoid label ambiguity.</li>
+  <li>EchoNet-LVH clinical thresholds follow ASE 2015 / ESC 2021 guidelines: IVSd &gt; 1.1 cm and LVPWd &gt; 1.1 cm.</li>
+  <li>CAMUS LA labels (class 3) were remapped to background (class 0) &mdash; this study targets LV only.</li>
+  <li>EchoNet-Dynamic has no LV wall annotation &mdash; a has_wall=False flag prevents wall loss from being computed on those samples.</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-6" data-slide="6">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Data Labeling</span>
+    <h2 class="slide-title">Data Labeling Strategy and Clinical Thresholds</h2>
+    </div>
+    <div class="slide-body">
+    <div class="table-wrap" style="margin-bottom:24px;">
+<table>
+<thead><tr><th>Class</th><th>Dataset</th><th>Clinical Rule</th><th>Guideline</th></tr></thead>
+<tbody>
+<tr><td>Normal</td><td>EchoNet-Dynamic</td><td>EF &ge; 55% &mdash; from FileList.csv EF column</td><td>ASE/ESC</td></tr>
+<tr><td>HFrEF</td><td>EchoNet-Dynamic</td><td>EF &le; 40% &mdash; grey zone 40&ndash;54% excluded entirely</td><td>ASE/ESC</td></tr>
+<tr><td>LVH/HCM</td><td>EchoNet-LVH</td><td>IVSd &gt; 1.1 cm OR LVPWd &gt; 1.1 cm &mdash; from MeasurementsList.csv</td><td>ASE 2015</td></tr>
+<tr><td>BG/Cav/Wall</td><td>CAMUS</td><td>Expert NIfTI mask: 0=BG, 1=LV Cavity, 2=LV Myocardium, 3=LA (remapped to 0)</td><td>CREATIS annotations</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card">
+<h3>Label Leakage Discovery</h3>
+<ul class="bullet-list" style="margin-top:12px;">
+  <li>Initially, EF, IVSd, LVPWd, LVIDd were considered as clinical input features alongside images.</li>
+  <li>Critical discovery: EchoNet-Dynamic samples have IVSd = -1 (not measured). EchoNet-LVH samples have IVSd &gt; 0 (measured because they are LVH candidates). The IVSd value alone identifies the LVH/HCM class with near-100% accuracy.</li>
+  <li><strong>Decision:</strong> all clinical features were removed. The system is a pure IMAGE-ONLY classifier.</li>
+</ul>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-7" data-slide="7">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Preprocessing</span>
+    <h2 class="slide-title">Data Normalization &mdash; Classification and Segmentation</h2>
+    <p class="slide-subtitle">Three datasets, three different visual environments</p>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div class="table-wrap">
+  <table>
+  <thead><tr><th>Step</th><th>Operation</th><th>Applied To</th><th>Purpose</th></tr></thead>
+  <tbody>
+  <tr><td>1</td><td>Frame extraction (ED + ES only)</td><td>EchoNet-Dynamic and LVH</td><td>Avoid near-duplicate frames and EF memorization</td></tr>
+  <tr><td>2</td><td>norm_u8() conversion</td><td>CAMUS NIfTI images</td><td>Convert single-channel float NIfTI to displayable range</td></tr>
+  <tr><td>3</td><td>Grayscale to RGB</td><td>CAMUS: cv2.COLOR_GRAY2RGB</td><td>All pretrained models expect 3-channel RGB input</td></tr>
+  <tr><td>4</td><td>resize_img()</td><td>All sources: 384&times;384 (seg) or 224&times;224 (clf)</td><td>Standardize spatial resolution</td></tr>
+  <tr><td>5</td><td>ImageNet Normalize</td><td>All sources</td><td>mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]</td></tr>
+  <tr><td>6</td><td>CLAHE enhancement</td><td>clip_limit=4.0, tile_grid_size=8&times;8, p=0.40</td><td>Harmonize inter-scanner differences</td></tr>
+  <tr><td>7</td><td>Speckle noise simulation</td><td>Rayleigh noise: scale=0.07, p=0.30</td><td>Simulate ultrasound speckle</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <div class="figure-panel">
+    <div class="figure-group-title">Original Image</div>
+    <div class="figure-wrap figure-xl figure-clickable">
+      <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+      <img src="assets/images/picture8_original.png" alt="Original echocardiogram frame">
+      <div class="figure-caption">Original echocardiogram frame</div>
+    </div>
+    <div class="figure-group-title">Normalized Image</div>
+    <div class="figure-wrap figure-xl figure-clickable">
+      <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+      <img src="assets/images/picture7_normalized.jpg" alt="Normalized echocardiogram frame">
+      <div class="figure-caption">Processed frame after resizing and ImageNet normalization</div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-8" data-slide="8">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Preprocessing</span>
+    <h2 class="slide-title">Data Preparation &mdash; Unified Environment</h2>
+    <p class="slide-subtitle">The harmonization pipeline</p>
+    </div>
+    <div class="slide-body">
+    <div class="pipeline" style="margin-bottom:14px;">
+  <div class="pipeline-step"><div class="step-num">Step 1</div><div class="step-name">Structural Standardization</div></div>
+  <span class="pipeline-arrow">&rarr;</span>
+  <div class="pipeline-step"><div class="step-num">Step 2</div><div class="step-name">Pixel Normalization</div></div>
+  <span class="pipeline-arrow">&rarr;</span>
+  <div class="pipeline-step"><div class="step-num">Step 3</div><div class="step-name">Contrast Harmonization</div></div>
+  <span class="pipeline-arrow">&rarr;</span>
+  <div class="pipeline-step"><div class="step-num">Step 4</div><div class="step-name">Noise Harmonization</div></div>
+  <span class="pipeline-arrow">&rarr;</span>
+  <div class="pipeline-step"><div class="step-num">Step 5</div><div class="step-name">Background Standardization</div></div>
+</div>
+<div class="harmonization-grid">
+  <div class="harmonization-group">
+    <h4>(a) Raw Clinical Input &ndash; Illustrating Data Heterogeneity</h4>
+    <div class="figure-row">
+      <div class="figure-wrap figure-xl">
+        <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+        <img src="assets/images/picture9_raw_a.png" alt="Raw clinical input sample 1">
+      </div>
+      <div class="figure-wrap figure-xl">
+        <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+        <img src="assets/images/picture10_raw_a.png" alt="Raw clinical input sample 2">
+      </div>
+    </div>
+  </div>
+  <div class="harmonization-group">
+    <h4>(b) Harmonized Output &ndash; Standardized Preprocessing Result</h4>
+    <div class="figure-row">
+      <div class="figure-wrap figure-xl">
+        <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+        <img src="assets/images/picture11_harmonized_b.jpg" alt="Harmonized output sample 1">
+      </div>
+      <div class="figure-wrap figure-xl">
+        <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+        <img src="assets/images/picture12_harmonized_b.jpg" alt="Harmonized output sample 2">
+      </div>
+    </div>
+  </div>
+</div>
+<p style="margin-top:12px;font-size:0.92rem;color:var(--text-muted);">After harmonization, the model sees images that are visually comparable regardless of their source. The manifest CSV records the source field for each sample, but the training pipeline uses only the image content.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-9" data-slide="9">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Data Split</span>
+    <h2 class="slide-title">Manifest File and Dataset Split Strategy</h2>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div>
+    <div class="card" style="margin-bottom:16px;">
+      <h3>Manifest CSV</h3>
+      <p>Each row contains: file path, class label (0/1/2), patient_id, source dataset, split assignment (train/val/test), has_wall flag. Single source of truth for all training and evaluation scripts.</p>
+    </div>
+    <h3 style="color:var(--primary);margin-bottom:12px;">Classification Split (GroupShuffleSplit)</h3>
+    <div class="table-wrap">
+    <table>
+    <thead><tr><th>Split</th><th>Proportion</th><th>Method</th><th>Seed</th></tr></thead>
+    <tbody>
+    <tr><td>Test</td><td>15% of total patients</td><td>GroupShuffleSplit &mdash; patient_id as group key</td><td>42</td></tr>
+    <tr><td>Validation</td><td>15% of remaining 85%</td><td>GroupShuffleSplit &mdash; patient_id as group key</td><td>42</td></tr>
+    <tr><td>Train</td><td>Remaining ~72%</td><td>After test and val removal</td><td>42</td></tr>
+    <tr><td>Balancing</td><td>Up to 6,000 per class</td><td>Oversampling minority classes</td><td>42</td></tr>
+    </tbody>
+    </table>
+    </div>
+  </div>
+  <div>
+    <h3 style="color:var(--primary);margin-bottom:12px;">Segmentation Split (Official Benchmark)</h3>
+    <ul class="bullet-list">
+      <li><strong>EchoNet-Dynamic:</strong> Uses the official FileList.csv split column from Stanford.</li>
+      <li><strong>CAMUS:</strong> Uses official split text files: subgroup_training.txt, subgroup_validation.txt, subgroup_testing.txt.</li>
+      <li><strong>Fallback:</strong> patient_splits() with seed=42 if official files not found.</li>
+    </ul>
+    <div class="card" style="margin-top:20px;">
+      <h3>Patient-Level Splitting</h3>
+      <p>GroupShuffleSplit enforces strict patient-level boundaries. All frames from one patient go to exactly one split &mdash; preventing per-patient cardiac shape memorization.</p>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-10" data-slide="10">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Augmentation</span>
+    <h2 class="slide-title">Data Augmentation Pipeline</h2>
+    <p class="slide-subtitle">Critical for echocardiographic robustness</p>
+    </div>
+    <div class="slide-body">
+    <div class="table-wrap">
+<table>
+<thead><tr><th>Augmentation</th><th>Parameters</th><th>Probability</th><th>Clinical Motivation</th></tr></thead>
+<tbody>
+<tr><td>HorizontalFlip</td><td>&mdash;</td><td>p=0.50</td><td>Mirrors cardiac orientation</td></tr>
+<tr><td>ShiftScaleRotate</td><td>shift &plusmn;7%, scale &plusmn;12%, rotate &plusmn;20&deg;</td><td>p=0.70</td><td>Probe repositioning variation</td></tr>
+<tr><td>Perspective</td><td>scale 3&ndash;8%</td><td>p=0.25</td><td>Oblique probe angles</td></tr>
+<tr><td>ElasticTransform</td><td>alpha=200, sigma=10 (seg) / alpha=140, sigma=8 (clf)</td><td>p=0.40 / p=0.35</td><td>Soft tissue deformation</td></tr>
+<tr><td>GridDistortion</td><td>5 steps, distort &plusmn;0.30</td><td>p=0.25 (seg only)</td><td>Ultrasound beam distortion</td></tr>
+<tr><td>RandomBrightnessContrast</td><td>&plusmn;30% brightness, &plusmn;30% contrast</td><td>p=0.60</td><td>Gain and TGC setting differences</td></tr>
+<tr><td>CLAHE</td><td>clip_limit=4.0, grid 8&times;8</td><td>p=0.40</td><td>Inter-scanner contrast harmonization</td></tr>
+<tr><td>GaussNoise</td><td>std 0.01&ndash;0.06</td><td>p=0.35</td><td>Electronic noise simulation</td></tr>
+<tr><td>Speckle (Rayleigh)</td><td>scale=0.07</td><td>p=0.30&ndash;0.35</td><td>Coherent ultrasound speckle</td></tr>
+<tr><td>CoarseDropout</td><td>1&ndash;3 holes, size 24&ndash;48px (seg)</td><td>p=0.30</td><td>Acoustic shadowing</td></tr>
+<tr><td>Mixup (clf only)</td><td>alpha=0.20, probability=0.40</td><td>p=0.40</td><td>Smooths decision boundaries</td></tr>
+<tr><td>Normalize (ImageNet)</td><td>mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225]</td><td>Always</td><td>Match pretrained encoder statistics</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-11" data-slide="11">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Architecture</span>
+    <h2 class="slide-title">Classification Models &mdash; Architecture Overview</h2>
+    <p class="slide-subtitle">Six architectures evaluated</p>
+    </div>
+    <div class="slide-body">
+    <div class="table-wrap">
+<table>
+<thead><tr><th>Model</th><th>Family</th><th>Transformer?</th><th>Pretrained</th><th>Backbone Freeze</th></tr></thead>
+<tbody>
+<tr class="highlight-row"><td>Swin-Tiny</td><td>Hierarchical Vision Transformer</td><td>YES</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>ConvNeXt-Small</td><td>Modern CNN (transformer-inspired)</td><td>PARTIAL</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>ResNet-50</td><td>Classic Residual CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>EfficientNet-B4</td><td>Compound-scaled CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>VGG-16</td><td>Deep Sequential CNN</td><td>NO</td><td>ImageNet (torchvision)</td><td>Fine-tuned from epoch 1</td></tr>
+<tr><td>Classic CNN</td><td>Custom 5-Block Sequential CNN</td><td>NO</td><td>NONE &mdash; random init</td><td>No freeze</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card" style="margin-top:20px;">
+<h3>Two-Phase Fine-Tuning (all timm models except Classic CNN)</h3>
+<p><strong>Phase 1 (epochs 1&ndash;5):</strong> All backbone parameters frozen. Only classification head trained.<br>
+<strong>Phase 2 (epoch 6 onward):</strong> unfreeze_backbone() &mdash; entire network fine-tuned with LLRD (backbone LR = 0.10 &times; head LR).</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-12" data-slide="12">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Architecture</span>
+    <h2 class="slide-title">Classic CNN &mdash; 5-Block Architecture with Batch Norm</h2>
+    <p class="slide-subtitle">Trained entirely from scratch &mdash; controlled baseline</p>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div class="table-wrap">
+  <table>
+  <thead><tr><th>Block</th><th>Input Ch.</th><th>Output Ch.</th><th>Spatial Size</th><th>Dropout</th></tr></thead>
+  <tbody>
+  <tr><td>Block 1</td><td>3 (RGB)</td><td>32</td><td>224 &rarr; 112 px</td><td>Dropout2d p=0.20</td></tr>
+  <tr><td>Block 2</td><td>32</td><td>64</td><td>112 &rarr; 56 px</td><td>Dropout2d p=0.25</td></tr>
+  <tr><td>Block 3</td><td>64</td><td>128</td><td>56 &rarr; 28 px</td><td>Dropout2d p=0.30</td></tr>
+  <tr><td>Block 4</td><td>128</td><td>256</td><td>28 &rarr; 14 px</td><td>Dropout2d p=0.30</td></tr>
+  <tr><td>Block 5</td><td>256</td><td>512</td><td>14 &rarr; 4&times;4 adaptive</td><td>&mdash;</td></tr>
+  <tr><td>Head</td><td>8192</td><td>3 classes</td><td>Flatten &rarr; Linear &rarr; BN &rarr; ReLU &rarr; Dropout</td><td>p=0.50 / 0.40</td></tr>
+  </tbody>
+  </table>
+  </div>
+  <div class="figure-col">
+  <div class="figure-wrap figure-hero">
+    <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/figure_31.png" alt="Classic CNN Architecture">
+    <div class="figure-caption">Architecture of the custom 5-block CNN baseline with Batch Normalization and ReLU</div>
+  </div>
+  </div>
+</div>
+<p style="margin-top:16px;font-size:0.9rem;">Classic CNN achieves <strong>88.53% accuracy</strong> and <strong>ROC-AUC 0.9673</strong> &mdash; remarkably competitive with ResNet-50 (0.9670).</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-13" data-slide="13">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Architecture</span>
+    <h2 class="slide-title">Segmentation Models and Encoders</h2>
+    <p class="slide-subtitle">Four segmentation frameworks evaluated</p>
+    </div>
+    <div class="slide-body">
+    <div class="table-wrap" style="margin-bottom:20px;">
+<table>
+<thead><tr><th>Model</th><th>Architecture</th><th>Encoder</th><th>Classes</th><th>Key Characteristic</th></tr></thead>
+<tbody>
+<tr class="highlight-row"><td>UNet++</td><td>Nested Dense Skip Connections</td><td>MiT-B3 (SegFormer)</td><td>3: BG / LV Cavity / LV Wall</td><td>Selected as final best model</td></tr>
+<tr><td>FPN</td><td>Feature Pyramid Network</td><td>MiT-B3 (SegFormer)</td><td>3: BG / LV Cavity / LV Wall</td><td>Best checkpoint at epoch 2</td></tr>
+<tr><td>MANet</td><td>Multi-scale Attention Network</td><td>EfficientNet-B5</td><td>3: BG / LV Cavity / LV Wall</td><td>Lower LR (5e-5) and grad_clip=0.5</td></tr>
+<tr><td>MedSAM</td><td>SAM Adaptation</td><td>ViT-B (frozen, SA-1B)</td><td>3: BG / LV Cavity / LV Wall</td><td>Near-zero LV Wall Dice (0.0002) at 53 epochs</td></tr>
+</tbody>
+</table>
+</div>
+<ul class="bullet-list">
+  <li><strong>UNet++ nested skip pathways</strong> progressively refine features before reaching the decoder &mdash; producing sharper LV boundaries.</li>
+  <li><strong>MiT-B3 transformer encoder</strong> provides global self-attention across the full image.</li>
+  <li>MiT-B3 is INCOMPATIBLE with UNet++ skip connections in segmentation-models-pytorch &mdash; UNet++ ran with its default CNN encoder.</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-14" data-slide="14">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+      <span class="slide-tag">Architecture</span>
+      <h2 class="slide-title">Justification for the UNet++ Hybrid Architecture</h2>
+    </div>
+    <div class="slide-body" style="display:flex;align-items:center;justify-content:center;">
+      <div class="figure-wrap figure-hero" style="max-width:900px;width:100%;">
+        <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+        <img src="assets/images/hybrid_nested_seg_framework.png" alt="Hybrid Nested Segmentation Framework">
+        <div class="figure-caption">Hybrid Nested Segmentation Framework — UNet++ Architecture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-15" data-slide="15">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Architecture</span>
+    <h2 class="slide-title">Architecture Additions &mdash; BN, Dropout, Two-Phase Freeze</h2>
+    <p class="slide-subtitle">Custom modifications to standard architectures</p>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div>
+    <div class="card" style="margin-bottom:16px;">
+      <h3>Custom Classifier Head</h3>
+      <p>Linear &rarr; BatchNorm1d &rarr; ReLU &rarr; Dropout(0.60) &rarr; Linear &rarr; BatchNorm1d &rarr; ReLU &rarr; Dropout(0.48) &rarr; Linear(&rarr;3 classes)</p>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <h3>Source-Aware Wall Masking</h3>
+      <p>For EchoNet-Dynamic samples (has_wall=False): wall class contribution to Dice and CE loss set to zero.</p>
+    </div>
+    <div class="card">
+      <h3>8-fold Test-Time Augmentation</h3>
+      <p>Segmentation only: 8 augmented predictions averaged at inference. NOT used for classification.</p>
+    </div>
+  </div>
+  <div class="figure-col">
+  <div class="figure-wrap figure-hero">
+    <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/figure_33.png" alt="Custom Classifier Head Architecture">
+    <div class="figure-caption">Custom Classifier Head Architecture</div>
+  </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide slide-training-config" id="slide-16" data-slide="16">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Training</span>
+    <h2 class="slide-title">Training Configuration and Batch Strategy</h2>
+    <p class="slide-subtitle">RTX 4060 Laptop GPU &mdash; 8 GB VRAM &mdash; Visual Studio Code</p>
+    </div>
+    <div class="slide-body">
+    <div class="table-wrap">
+<table>
+<thead><tr><th>Parameter</th><th>Classification</th><th>Segmentation</th></tr></thead>
+<tbody>
+<tr><td>Batch Size</td><td>16 samples</td><td>4 samples</td></tr>
+<tr><td>Input Resolution</td><td>224 &times; 224 pixels</td><td>384 &times; 384 pixels</td></tr>
+<tr><td>Max Epochs</td><td>80</td><td>100</td></tr>
+<tr><td>Early Stopping Patience</td><td>18 epochs (multi-signal: loss + F1 + Acc)</td><td>20 epochs (LV Cavity Dice)</td></tr>
+<tr><td>Optimizer</td><td>AdamW</td><td>AdamW</td></tr>
+<tr><td>Base Learning Rate</td><td>2e-4</td><td>2e-4 (MANet: 5e-5)</td></tr>
+<tr><td>Minimum Learning Rate</td><td>1e-6</td><td>5e-7</td></tr>
+<tr><td>LR Schedule</td><td>Linear warmup (5 ep) + Cosine Annealing</td><td>Same</td></tr>
+<tr><td>LLRD (backbone vs head)</td><td>Backbone: 0.10 &times; base LR / Head: base LR</td><td>N/A</td></tr>
+<tr><td>Weight Decay</td><td>1e-4</td><td>1e-4</td></tr>
+<tr><td>Gradient Clipping</td><td>max norm = 1.0</td><td>max norm = 1.0 (MANet: 0.5)</td></tr>
+<tr><td>AMP Mixed Precision</td><td>fp16 forward + fp32 weights</td><td>fp16 forward + fp32 weights</td></tr>
+<tr><td>Backbone Freeze Phase</td><td>5 epochs frozen then unfrozen</td><td>N/A</td></tr>
+<tr><td>Mixup</td><td>alpha=0.20, prob=0.40</td><td>Not used</td></tr>
+<tr><td>TTA at test time</td><td>Not used</td><td>8-fold TTA</td></tr>
+<tr><td>Random Seed</td><td>42</td><td>42</td></tr>
+</tbody>
+</table>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-17" data-slide="17">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Training</span>
+    <h2 class="slide-title">Loss Functions</h2>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div>
+    <h3 style="color:var(--primary);margin-bottom:12px;">Classification &mdash; Focal Loss with Label Smoothing</h3>
+    <ul class="bullet-list">
+      <li><strong>Focal Loss:</strong> L_focal = (1 - p_t)^&gamma; &times; CE(p, y), with &gamma;=2.0</li>
+      <li><strong>Label smoothing:</strong> &epsilon;=0.05 (true class probability = 0.95)</li>
+      <li><strong>Class-weighted alpha:</strong> inversely proportional to class frequency</li>
+      <li><strong>Multi-stream loss:</strong> main logits &times; 1.0 + image auxiliary head &times; 0.35</li>
+    </ul>
+  </div>
+  <div>
+    <h3 style="color:var(--primary);margin-bottom:12px;">Segmentation &mdash; Composite Three-Term Loss</h3>
+    <div class="table-wrap">
+    <table>
+    <thead><tr><th>Loss Term</th><th>Weight</th><th>Purpose</th></tr></thead>
+    <tbody>
+    <tr><td>SoftDiceLoss</td><td>45%</td><td>Primary overlap metric &mdash; optimizes Dice score</td></tr>
+    <tr><td>TopKCELoss</td><td>35%</td><td>Online Hard Example Mining &mdash; top 50% hardest pixels</td></tr>
+    <tr><td>BoundaryLoss</td><td>20%</td><td>Penalizes errors at LV endocardial/epicardial borders</td></tr>
+    </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-18" data-slide="18">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Metrics</span>
+    <h2 class="slide-title">Metrics and Overfitting Detection Strategy</h2>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div>
+    <h3 style="color:var(--primary);margin-bottom:12px;">Classification Metrics</h3>
+    <div class="grid-3" style="grid-template-columns:1fr 1fr;">
+      <div class="card stat-card"><div class="stat-value">Acc</div><div class="stat-label">Accuracy</div></div>
+      <div class="card stat-card"><div class="stat-value">F1</div><div class="stat-label">F1-Macro (primary)</div></div>
+      <div class="card stat-card"><div class="stat-value">AUC</div><div class="stat-label">ROC-AUC Macro</div></div>
+      <div class="card stat-card"><div class="stat-value">PR</div><div class="stat-label">PR-AUC / PRC</div></div>
+      <div class="card stat-card"><div class="stat-value">&kappa;</div><div class="stat-label">Cohen's Kappa</div></div>
+      <div class="card stat-card"><div class="stat-value">MCC</div><div class="stat-label">Matthews Corr. Coef.</div></div>
+    </div>
+    <p style="margin-top:12px;font-size:0.85rem;color:var(--text-muted);">Also: Log Loss, McNemar's Test, False Negative Reduction %, Decision Curve Analysis (DCA)</p>
+  </div>
+  <div>
+    <h3 style="color:var(--primary);margin-bottom:12px;">Overfitting Detection</h3>
+    <ul class="bullet-list">
+      <li><strong>Primary signal:</strong> val_loss monitored with patience=18 (clf) / 20 (seg)</li>
+      <li><strong>Multi-signal monitoring:</strong> val_F1_macro and val_accuracy tracked alongside val_loss</li>
+      <li><strong>Visual detection:</strong> widening gap between training and validation loss curves</li>
+      <li><strong>Best checkpoint restoration:</strong> model from epoch with LOWEST validation loss restored</li>
+    </ul>
+    <h3 style="color:var(--primary);margin:16px 0 12px;">Segmentation Metrics</h3>
+    <p style="font-size:0.9rem;">Dice Coefficient, IoU/Jaccard Index, Pixel Accuracy, Precision and Recall per structure</p>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-19" data-slide="19" data-chart="classification">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Results</span>
+    <h2 class="slide-title">Classification Results &mdash; F1-Macro, DCA, PRC</h2>
+    <p class="slide-subtitle">Swin-Tiny achieves best performance across all metrics</p>
+    </div>
+    <div class="slide-body">
+    <div class="table-wrap" style="margin-bottom:20px;">
+<table>
+<thead><tr><th>Model</th><th>Accuracy</th><th>F1-Macro</th><th>ROC-AUC</th><th>MCC</th><th>Log Loss</th></tr></thead>
+<tbody>
+<tr class="highlight-row"><td>Swin-Tiny (best)</td><td>92.36%</td><td>0.9295</td><td>0.9827</td><td>0.8814</td><td>0.2431</td></tr>
+<tr><td>Classic-CNN</td><td>88.53%</td><td>0.8937</td><td>0.9673</td><td>0.8234</td><td>0.3769</td></tr>
+<tr><td>ConvNeXt-Small</td><td>88.84%</td><td>0.8961</td><td>0.9662</td><td>0.8268</td><td>0.3664</td></tr>
+<tr><td>ResNet-50</td><td>87.60%</td><td>0.8860</td><td>0.9670</td><td>0.8083</td><td>0.3111</td></tr>
+<tr><td>VGG-16</td><td>87.82%</td><td>0.8741</td><td>0.9512</td><td>0.8156</td><td>0.3812</td></tr>
+<tr><td>EfficientNet-B4</td><td>85.33%</td><td>0.8666</td><td>0.9525</td><td>0.7768</td><td>0.3983</td></tr>
+</tbody>
+</table>
+</div>
+<div class="grid-2" style="gap:14px;">
+    <div class="figure-wrap figure-lg">
+      <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+      <img src="assets/images/figure_44.png" alt="Figure 44: DCA">
+      <div class="figure-caption">Decision Curve Analysis (DCA)</div>
+    </div>
+    <div class="figure-wrap figure-lg">
+      <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+      <img src="assets/images/figure_45.png" alt="Figure 45: PRC">
+      <div class="figure-caption">Precision-Recall Curves (Macro-Averaged), mAP=0.9703 for Swin-Tiny</div>
+    </div>
+</div>
+<p style="margin-top:10px;font-size:0.92rem;color:var(--text-muted);">Swin-Tiny: F1-Macro 0.9295 &bull; ROC-AUC 0.9827. <em>Click any figure to view full screen.</em></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-20" data-slide="20">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Explainability</span>
+    <h2 class="slide-title">Swin-Tiny Attention Rollout</h2>
+    <p class="slide-subtitle">Grad-CAM++ is incompatible with Swin-Tiny &mdash; Attention Rollout is the correct method</p>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div>
+    <ul class="bullet-list">
+      <li>Grad-CAM++ requires spatially structured convolutional feature maps. Swin-Tiny uses patch tokenization and window-partitioned self-attention.</li>
+      <li><strong>Attention Rollout:</strong> A_hat_L = (A_L + I) / 2, then Rollout = A_hat_1 &times; A_hat_2 &times; ... &times; A_hat_L</li>
+      <li>The [CLS] token row gives spatial attention weights across all input patches.</li>
+      <li>Central high-attention region (yellow) tracks the left ventricular cavity across all six tested frames.</li>
+      <li>No corner bias or artefact-driven attention detected.</li>
+      <li>Contrast: ResNet-50 and EfficientNet-B4 showed corner bias in activation maps.</li>
+    </ul>
+  </div>
+  <div class="figure-col">
+  <div class="figure-wrap figure-hero">
+    <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/swintiny_attention_rollout.png" alt="Swin-Tiny Attention Rollout">
+    <div class="figure-caption">Attention Rollout Explainability Visualizations for All Classification Models</div>
+  </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-21" data-slide="21" data-chart="segmentation">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Results</span>
+    <h2 class="slide-title">Segmentation Results &mdash; UNet++ Heatmap</h2>
+    </div>
+    <div class="slide-body">
+    <div class="table-wrap" style="margin-bottom:20px;">
+<table>
+<thead><tr><th>Model</th><th>Dice FG</th><th>Dice Cav</th><th>Dice Wall</th><th>IoU Cav</th><th>IoU Wall</th><th>Pixel Acc</th></tr></thead>
+<tbody>
+<tr class="highlight-row"><td>UNet++ (best)</td><td>0.9111</td><td>0.9439</td><td>0.8784</td><td>0.8937</td><td>0.7832</td><td>97.46%</td></tr>
+<tr><td>FPN</td><td>0.9098</td><td>0.9427</td><td>0.8769</td><td>0.8916</td><td>0.7809</td><td>97.45%</td></tr>
+<tr><td>MANet</td><td>0.8782</td><td>0.9251</td><td>0.8313</td><td>0.8606</td><td>0.7113</td><td>96.49%</td></tr>
+<tr><td>MedSAM</td><td>0.2623</td><td>0.5243</td><td>0.0002</td><td>0.3553</td><td>0.0001</td><td>&lt; 1%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="grid-2">
+  <div class="figure-col">
+  <div class="figure-wrap figure-hero">
+    <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/unetpp_heatmap.png" alt="UNet++ Segmentation Heatmap">
+    <div class="figure-caption">UNet++ Segmentation Heatmap &mdash; LV Cavity and LV Wall delineation</div>
+  </div>
+  </div>
+  <div class="chart-container"><canvas id="segChart"></canvas></div>
+</div>
+<p style="margin-top:8px;font-size:0.9rem;color:var(--text-muted);"><em>Click heatmap to view full screen.</em></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-22" data-slide="22">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Results</span>
+    <h2 class="slide-title">Training Loss Curves &mdash; Swin-Tiny and UNet++</h2>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div>
+    <h3>Swin-Tiny Classification</h3>
+    <ul class="bullet-list" style="margin-bottom:10px;">
+        <li>Training and validation loss converge near 0.18&ndash;0.20</li>
+        <li>Minimal gap &mdash; confirms good generalization without overfitting</li>
+        <li>Early stopping at epoch 42 (patience=18)</li>
+      </ul>
+    <div class="figure-wrap figure-hero">
+      <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/swintiny_training_curve.png" alt="Classification Training Loss Curves">
+      <div class="figure-caption">Classification Training Loss Curves</div>
+    </div>
+  </div>
+  <div>
+    <h3>UNet++ Segmentation</h3>
+    <ul class="bullet-list" style="margin-bottom:10px;">
+        <li>Best checkpoint at epoch 2 (LV Cavity IoU 0.7740, LV Wall IoU 0.4458)</li>
+        <li>LV Wall validation IoU becomes unstable after first few epochs</li>
+        <li>Instability consistent across all four segmentation models</li>
+      </ul>
+    <div class="figure-wrap figure-hero">
+      <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/unetpp_training_curve.png" alt="Segmentation Loss Curves">
+      <div class="figure-caption">Segmentation Loss Curves</div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-23" data-slide="23">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Results</span>
+    <h2 class="slide-title">Confusion Matrices &mdash; Swin-Tiny and UNet++</h2>
+    <p class="slide-subtitle">Best-performing model from each task</p>
+    </div>
+    <div class="slide-body">
+    <div class="grid-2">
+  <div>
+    <h3 style="color:var(--primary);margin-bottom:12px;">Swin-Tiny Classification</h3>
+    <div class="figure-wrap figure-hero" style="margin-bottom:12px;">
+      <span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+      <img src="assets/images/swintiny_confusion_matrix.png" alt="Swin-Tiny Confusion Matrix">
+      <div class="figure-caption">Normalized Confusion Matrices (Swin-Tiny diagonal: 0.915 / 0.906 / 0.964)</div>
+    </div>
+    <ul class="bullet-list">
+      <li><strong>Normal:</strong> 91.5% correctly classified (7.0% misclassified as HFrEF)</li>
+      <li><strong>HFrEF:</strong> 90.6% correctly classified</li>
+      <li><strong>LVH/HCM:</strong> 96.4% correctly classified &mdash; highest per-class recall</li>
+    </ul>
+  </div>
+  <div>
+    <h3 style="color:var(--primary);margin-bottom:12px;">UNet++ Segmentation</h3>
+    <div class="card">
+      <p><strong>LV Cavity:</strong> Precision=0.9418, Recall=0.9460</p>
+      <p style="margin-top:8px;"><strong>LV Wall:</strong> Precision=0.8825, Recall=0.8743</p>
+      <p style="margin-top:12px;font-size:0.85rem;color:var(--text-muted);">Wall recall slightly lower than precision &mdash; mild under-segmentation of thin wall in acoustically challenging frames.</p>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h3>Other Models (Summary)</h3>
+      <ul class="bullet-list" style="margin-top:8px;">
+        <li>EfficientNet-B4: Highest Normal misclassification (21.9% toward HFrEF)</li>
+        <li>VGG-16: Non-negligible Normal-LVH/HCM confusion (7.3%)</li>
+        <li>Classic CNN: Textbook overfitting from epoch 10, but AUC 0.9673 at best checkpoint</li>
+      </ul>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-24" data-slide="24">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Application</span>
+    <h2 class="slide-title">LV-DeepSeg &mdash; Clinical Desktop Application</h2>
+    <p class="slide-subtitle">Complete clinical decision support tool with LLM report generation</p>
+    </div>
+    <div class="slide-body">
+    <div class="workflow-steps" style="margin-bottom:24px;">
+  <div class="workflow-step"><div class="ws-num">1</div><h4>Main Dashboard</h4><p>Upload AVI, MP4, DICOM, PNG, JPG</p></div>
+  <div class="workflow-step"><div class="ws-num">2</div><h4>Diagnostic Output</h4><p>Condition, confidence, uncertainty</p></div>
+  <div class="workflow-step"><div class="ws-num">3</div><h4>Segmentation Viewer</h4><p>Colored LV boundary masks</p></div>
+  <div class="workflow-step"><div class="ws-num">4</div><h4>Metrics Dashboard</h4><p>Dice, IoU, AUC, F1, Kappa</p></div>
+  <div class="workflow-step"><div class="ws-num">5</div><h4>LLM Report</h4><p>Claude API or template fallback</p></div>
+</div>
+<div class="grid-3">
+  <div class="figure-wrap figure-sm"><span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/figure_55.png" alt="Figure 55: Main Dashboard"><div class="figure-caption">Main Dashboard</div></div>
+  <div class="figure-wrap figure-sm"><span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/figure_56.png" alt="Figure 56: Diagnostic Output"><div class="figure-caption">Diagnostic Output</div></div>
+  <div class="figure-wrap figure-sm"><span class="figure-zoom-hint">&#128269; Click to enlarge</span>
+    <img src="assets/images/figure_57.png" alt="Figure 57: Segmentation Overlay"><div class="figure-caption">Segmentation Overlay</div></div>
+</div>
+<p style="margin-top:16px;font-size:0.85rem;color:var(--text-muted);"><strong>LLM design principle:</strong> The LLM does not make diagnostic decisions. It translates the model's classification into professional medical language. The prompt prohibits inventing patient data or prescribing treatment.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="slide-25" data-slide="25">
+  <div class="slide-inner stagger">
+    <div class="slide-header">
+    <span class="slide-tag">Conclusion</span>
+    <h2 class="slide-title">Conclusion, Limitations, and Future Directions</h2>
+    </div>
+    <div class="slide-body">
+    <div class="conclusion-grid">
+  <div class="conclusion-block card">
+    <h3>Conclusion</h3>
+    <ul class="bullet-list">
+      <li>Swin-Tiny: ROC-AUC 0.9827, 92.36% accuracy &mdash; 48% fewer missed diagnoses than weakest model</li>
+      <li>UNet++: LV Cavity Dice 0.9439, LV Wall Dice 0.8784</li>
+      <li>MedSAM failure (Wall Dice 0.0002) proves SAM requires full in-domain retraining</li>
+      <li>LV-DeepSeg packages the full pipeline as a clinically usable application</li>
+    </ul>
+  </div>
+  <div class="conclusion-block card">
+    <h3>Limitations</h3>
+    <ul class="bullet-list">
+      <li>Limited scanner diversity in combined datasets</li>
+      <li>Inter-observer variability in LV Wall annotation</li>
+      <li>Single 2D frame classification &mdash; no temporal cardiac cycle</li>
+      <li>ImageNet pretraining vs. domain-specific echocardiographic pretraining</li>
+    </ul>
+  </div>
+  <div class="conclusion-block card">
+    <h3>Future Directions</h3>
+    <ul class="bullet-list">
+      <li>3D spatiotemporal video analysis</li>
+      <li>Full four-chamber scope (LV, RV, LA, RA)</li>
+      <li>Tissue Doppler Imaging (TDI) integration</li>
+      <li>Prospective clinical validation with cardiologists</li>
+    </ul>
+  </div>
+</div>
+<div class="thank-you">
+  <h2>Thank You</h2>
+  <p style="color:#000000;">Questions Welcome</p>
+</div>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+</body>
+</html>
