@@ -1057,6 +1057,63 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
     animation: none !important;
   }
   
+  /* ═══════════════════════════════════════════════════════════════════
+     FORCE ALL CONTENT VISIBLE - Override animation opacity states
+     ═══════════════════════════════════════════════════════════════════ */
+  
+  /* Force visibility for all slides and their children (Slides 2-25) */
+  .slide,
+  .slide * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  /* Override any data-anim attributes that might hide elements */
+  [data-anim] {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  /* Override stagger animation classes */
+  .stagger,
+  .stagger * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  
+  /* ═══════════════════════════════════════════════════════════════════
+     RESTORE SLIDE 1 ANIMATIONS - Keep title slide looking polished
+     ═══════════════════════════════════════════════════════════════════ */
+  
+  /* Re-enable animations specifically for Slide 1 */
+  #slide-1,
+  #slide-1 * {
+    opacity: initial !important;
+    transform: initial !important;
+    animation: initial !important;
+  }
+  
+  /* Ensure Slide 1 animation phases work */
+  #slide-1 .slide-1-anim-phase1,
+  #slide-1 .slide-1-anim-phase2,
+  #slide-1 .slide-1-anim-phase3,
+  #slide-1 .slide-1-table-header,
+  #slide-1 .slide-1-person {
+    opacity: initial !important;
+    animation: initial !important;
+  }
+  
+  /* Keep Slide 1 fadeInUp animation intact */
+  #slide-1.visible .slide-1-anim-phase1,
+  #slide-1.visible .slide-1-anim-phase2,
+  #slide-1.visible .slide-1-table-header,
+  #slide-1.visible .slide-1-person {
+    animation: fadeInUp 1.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards !important;
+  }
+  
   /* Slide 1 specific - first slide gets top padding adjustment */
   #slide-1 {
     padding-top: calc(var(--nav-h) + 15px) !important;
