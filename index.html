@@ -95,6 +95,21 @@
         </table>
       </div>
     </div>
+
+    <!-- QR Code Icon (clickable) -->
+    <div class="qr-code-container">
+      <img src="assets/images/qr_code.jpg" alt="QR Code" class="qr-code-icon">
+    </div>
+
+    <!-- QR Code Modal (hidden by default) -->
+    <div class="qr-modal" id="qrModal" aria-hidden="true">
+      <div class="qr-modal-overlay"></div>
+      <div class="qr-modal-content">
+        <button class="qr-modal-close" id="qrModalClose" aria-label="Close QR code">×</button>
+        <img src="assets/images/qr_code.jpg" alt="QR Code - Large View" class="qr-modal-image">
+        <p class="qr-modal-caption">Scan to access additional resources</p>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -211,6 +211,51 @@
   lightboxClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
+  /* ── QR Code Modal ── */
+  const qrCodeIcon = document.querySelector('.qr-code-icon');
+  const qrModal = document.getElementById('qrModal');
+  const qrModalClose = document.getElementById('qrModalClose');
+
+  function openQRModal() {
+    qrModal.classList.add('open');
+    qrModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeQRModal() {
+    qrModal.classList.remove('open');
+    qrModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  if (qrCodeIcon) {
+    qrCodeIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openQRModal();
+    });
+  }
+
+  if (qrModalClose) {
+    qrModalClose.addEventListener('click', closeQRModal);
+  }
+
+  if (qrModal) {
+    // Close modal when clicking on overlay
+    qrModal.addEventListener('click', (e) => {
+      if (e.target === qrModal || e.target.classList.contains('qr-modal-overlay')) {
+        closeQRModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && qrModal.classList.contains('open')) {
+        e.preventDefault();
+        closeQRModal();
+      }
+    });
+  }
+
   /* ── Charts ── */
   let clfChart = null;
   let segChart = null;
