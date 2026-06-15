@@ -39,39 +39,77 @@
     const outSlide = slides[currentSlide];
     const inSlide  = slides[index];
 
-    // Stage incoming slide off-screen (no transition yet)
-    inSlide.style.transition = 'none';
-    inSlide.classList.remove('visible', 'slide-exit-left', 'slide-exit-right');
-    inSlide.classList.add(direction > 0 ? 'slide-enter-right' : 'slide-enter-left');
+    // Check if this is the cinematic transition (Slide 1 → Slide 2)
+    const isCinematicTransition = (currentSlide === 0 && index === 1);
 
-    // Force reflow so the browser registers the start position
-    void inSlide.offsetWidth;
+    if (isCinematicTransition) {
+      // ── CINEMATIC TRANSITION: Slide 1 → Slide 2 ──
+      // Step 1: Add zoom-out animation to Slide 1
+      outSlide.classList.add('zoom-out-transition');
 
-    // Re-enable transitions
-    inSlide.style.transition = '';
+      // Step 2: After 700ms, hide Slide 1 and show Slide 2
+      setTimeout(() => {
+        outSlide.classList.remove('visible');
+        outSlide.style.display = 'none';
 
-    // Outgoing slide exits in the opposite direction
-    outSlide.classList.remove('visible');
-    outSlide.classList.add(direction > 0 ? 'slide-exit-left' : 'slide-exit-right');
+        // Prepare Slide 2
+        inSlide.style.display = 'flex';
+        inSlide.classList.add('visible', 'fade-in-transition');
 
-    // Incoming slide slides into view
-    inSlide.classList.remove('slide-enter-right', 'slide-enter-left');
-    inSlide.classList.add('visible');
+        // Update UI
+        currentSlide = index;
+        progressBar.style.width = ((index + 1) / totalSlides * 100) + '%';
+        slideCounter.textContent = (index + 1) + ' / ' + totalSlides;
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
 
-    // Update UI
-    currentSlide = index;
-    progressBar.style.width = ((index + 1) / totalSlides * 100) + '%';
-    slideCounter.textContent = (index + 1) + ' / ' + totalSlides;
-    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        if (inSlide.dataset.chart === 'classification') initClassificationChart();
+        if (inSlide.dataset.chart === 'segmentation')   initSegmentationChart();
 
-    if (inSlide.dataset.chart === 'classification') initClassificationChart();
-    if (inSlide.dataset.chart === 'segmentation')   initSegmentationChart();
+        // Step 3: Clean up classes after animations complete
+        setTimeout(() => {
+          outSlide.classList.remove('zoom-out-transition');
+          inSlide.classList.remove('fade-in-transition');
+          outSlide.style.display = '';
+          isAnimating = false;
+        }, 900);
+      }, 700);
 
-    setTimeout(() => {
-      // Clean up exit classes from old slide
-      outSlide.classList.remove('slide-exit-left', 'slide-exit-right');
-      isAnimating = false;
-    }, ANIM_DURATION);
+    } else {
+      // ── STANDARD TRANSITION: All other slides ──
+      // Stage incoming slide off-screen (no transition yet)
+      inSlide.style.transition = 'none';
+      inSlide.classList.remove('visible', 'slide-exit-left', 'slide-exit-right');
+      inSlide.classList.add(direction > 0 ? 'slide-enter-right' : 'slide-enter-left');
+
+      // Force reflow so the browser registers the start position
+      void inSlide.offsetWidth;
+
+      // Re-enable transitions
+      inSlide.style.transition = '';
+
+      // Outgoing slide exits in the opposite direction
+      outSlide.classList.remove('visible');
+      outSlide.classList.add(direction > 0 ? 'slide-exit-left' : 'slide-exit-right');
+
+      // Incoming slide slides into view
+      inSlide.classList.remove('slide-enter-right', 'slide-enter-left');
+      inSlide.classList.add('visible');
+
+      // Update UI
+      currentSlide = index;
+      progressBar.style.width = ((index + 1) / totalSlides * 100) + '%';
+      slideCounter.textContent = (index + 1) + ' / ' + totalSlides;
+      dots.forEach((d, i) => d.classList.toggle('active', i === index));
+
+      if (inSlide.dataset.chart === 'classification') initClassificationChart();
+      if (inSlide.dataset.chart === 'segmentation')   initSegmentationChart();
+
+      setTimeout(() => {
+        // Clean up exit classes from old slide
+        outSlide.classList.remove('slide-exit-left', 'slide-exit-right');
+        isAnimating = false;
+      }, ANIM_DURATION);
+    }
   }
 
   prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));

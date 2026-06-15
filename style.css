@@ -138,6 +138,44 @@ body {
   will-change: transform, opacity;
 }
 
+/* Cinematic Zoom Transition Classes */
+.zoom-out-transition {
+  animation: zoomOutEffect 0.8s forwards;
+  transform-origin: center center;
+}
+
+@keyframes zoomOutEffect {
+  0% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: scale(1.5); 
+    opacity: 0; 
+  }
+}
+
+.fade-in-transition {
+  animation: fadeInEffect 0.8s forwards;
+  transform-origin: center center;
+}
+
+@keyframes fadeInEffect {
+  0% { 
+    transform: scale(0.9); 
+    opacity: 0; 
+  }
+  100% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}
+
+/* Ensure Slide 1 has proper overflow handling during zoom */
+#slide-1 {
+  overflow: hidden;
+}
+
 /* incoming from right (next slide) */
 .slide.slide-enter-right {
   transform: translateX(60px);
