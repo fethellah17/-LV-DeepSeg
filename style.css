@@ -756,6 +756,65 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
   margin-top: 0;
 }
 
+/* Slide 22 specific — equalize loss curve image sizes */
+#slide-22 .grid-2 {
+  gap: 30px;
+  align-items: start;
+}
+
+#slide-22 .grid-2 > div {
+  display: flex;
+  flex-direction: column;
+}
+
+#slide-22 .grid-2 h3 {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.8em;
+  margin-top: 0;
+}
+
+#slide-22 .figure-wrap.figure-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+#slide-22 .figure-wrap.figure-hero img {
+  width: 100%;
+  height: 400px;
+  max-height: 400px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Slide 23 specific — h3 styling and left image 30% reduction */
+#slide-23 .grid-2 h3 {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.8em;
+  margin-top: 0;
+}
+
+#slide-23 .grid-2 > div:first-child .figure-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+#slide-23 .grid-2 > div:first-child .figure-wrap img {
+  width: 70%;
+  max-width: 70%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 /* ── Per-slide zoom — viewport-relative font scaling ── */
 /* Uses vw units so content fills the slide in both normal and fullscreen */
 
@@ -776,6 +835,8 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 #slide-17 .slide-inner { font-size: 1.18vw; } /* was 16 — Loss functions */
 #slide-18 .slide-inner { font-size: 1.18vw; } /* was 17 — Metrics */
 #slide-20 .slide-inner { font-size: 1.18vw; } /* Explainability */
+#slide-22 .slide-inner { font-size: 1.18vw; } /* Training Loss Curves */
+#slide-23 .slide-inner { font-size: 1.18vw; } /* Confusion Matrices */
 #slide-24 .slide-inner { font-size: 1.18vw; } /* was 23 — Application */
 #slide-25 .slide-inner { font-size: 1.18vw; } /* was 24 — Conclusion */
 
@@ -785,7 +846,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 #slide-10 .slide-inner *, #slide-11 .slide-inner *, #slide-12 .slide-inner *,
 #slide-13 .slide-inner *, #slide-14 .slide-inner *, #slide-15 .slide-inner *,
 #slide-17 .slide-inner *, #slide-18 .slide-inner *, #slide-20 .slide-inner *,
-#slide-24 .slide-inner *, #slide-25 .slide-inner * {
+#slide-22 .slide-inner *, #slide-23 .slide-inner *, #slide-24 .slide-inner *, #slide-25 .slide-inner * {
   font-size: revert;
 }
 
@@ -795,13 +856,13 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 #slide-10 .slide-title, #slide-11 .slide-title, #slide-12 .slide-title,
 #slide-13 .slide-title, #slide-14 .slide-title, #slide-15 .slide-title,
 #slide-17 .slide-title, #slide-18 .slide-title, #slide-20 .slide-title,
-#slide-24 .slide-title, #slide-25 .slide-title { font-size: clamp(1.6rem, 2.2em, 2.6rem); }
+#slide-22 .slide-title, #slide-23 .slide-title, #slide-24 .slide-title, #slide-25 .slide-title { font-size: clamp(1.6rem, 2.2em, 2.6rem); }
 
 /* Table */
 #slide-2 table,  #slide-3 table,  #slide-4 table,  #slide-5 table,  #slide-6 table,  #slide-7 table,
 #slide-8 table,  #slide-9 table,  #slide-10 table, #slide-11 table,
 #slide-12 table, #slide-13 table, #slide-17 table, #slide-18 table, #slide-20 table,
-#slide-24 table, #slide-25 table { font-size: 0.88em; }
+#slide-22 table, #slide-23 table, #slide-24 table, #slide-25 table { font-size: 0.88em; }
 
 /* Slide 5 compact table — 10% size reduction */
 #slide-5 table { font-size: 0.79em; }
@@ -810,12 +871,12 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 #slide-2 th,  #slide-3 th,  #slide-4 th,  #slide-5 th,  #slide-6 th,  #slide-7 th,
 #slide-8 th,  #slide-9 th,  #slide-10 th, #slide-11 th,
 #slide-12 th, #slide-13 th, #slide-17 th, #slide-18 th, #slide-20 th,
-#slide-24 th, #slide-25 th { padding: 0.7em 0.9em; }
+#slide-22 th, #slide-23 th, #slide-24 th, #slide-25 th { padding: 0.7em 0.9em; }
 
 #slide-2 td,  #slide-3 td,  #slide-4 td,  #slide-5 td,  #slide-6 td,  #slide-7 td,
 #slide-8 td,  #slide-9 td,  #slide-10 td, #slide-11 td,
 #slide-12 td, #slide-13 td, #slide-17 td, #slide-18 td, #slide-20 td,
-#slide-24 td, #slide-25 td { padding: 0.65em 0.9em; }
+#slide-22 td, #slide-23 td, #slide-24 td, #slide-25 td { padding: 0.65em 0.9em; }
 
 /* Slide 5 compact table padding — 10% reduction */
 #slide-5 th { padding: 0.63em 0.81em; }
@@ -824,7 +885,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 /* Cards */
 #slide-2 .card,  #slide-3 .card,  #slide-4 .card,  #slide-6 .card,  #slide-7 .card,  #slide-9 .card,
 #slide-12 .card, #slide-13 .card, #slide-15 .card, #slide-17 .card, #slide-18 .card, #slide-20 .card,
-#slide-24 .card, #slide-25 .card { padding: 1em 1.1em; }
+#slide-22 .card, #slide-23 .card, #slide-24 .card, #slide-25 .card { padding: 1em 1.1em; }
 
 /* Outline list */
 #slide-2 .outline-list li { padding: 1em 1.2em; font-size: 1em; }
@@ -832,7 +893,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 /* Bullet list items */
 #slide-3 .bullet-list li,  #slide-4 .bullet-list li,  #slide-6 .bullet-list li,  #slide-7 .bullet-list li,  #slide-9 .bullet-list li,
 #slide-11 .bullet-list li, #slide-13 .bullet-list li, #slide-18 .bullet-list li, #slide-20 .bullet-list li,
-#slide-24 .bullet-list li, #slide-25 .bullet-list li { font-size: 1em; margin-bottom: 0.7em; }
+#slide-22 .bullet-list li, #slide-23 .bullet-list li, #slide-24 .bullet-list li, #slide-25 .bullet-list li { font-size: 1em; margin-bottom: 0.7em; }
 
 /* ── Per-element entrance animations ── */
 
