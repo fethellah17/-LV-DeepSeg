@@ -995,35 +995,139 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 
 /* ── 0. GLOBAL CONTAINER FIXES FOR MOBILE SCROLL ── */
 @media (max-width: 768px) {
+  /* ═══════════════════════════════════════════════════════════════════
+     CRITICAL: TRANSFORM TO SINGLE-SCROLL EXPERIENCE ON MOBILE
+     Desktop remains slide-by-slide; mobile becomes continuous scroll
+     ═══════════════════════════════════════════════════════════════════ */
+  
   /* Allow body and presentation to handle variable height slides */
   html {
-    height: auto;
-    overflow: visible;
+    height: auto !important;
+    overflow: visible !important;
   }
   
   body {
-    height: auto;
-    min-height: 100vh;
-    overflow: visible;
-  }
-  
-  .presentation {
-    height: auto;
-    min-height: 100vh;
-    overflow: visible;
-  }
-  
-  /* Default slide behavior - keep fixed for most slides */
-  .slide {
-    position: absolute;
-    height: 100vh;
-  }
-  
-  /* Slide 1 specific override - allow natural height and scrolling */
-  #slide-1 {
-    position: relative !important;
     height: auto !important;
-    min-height: 100vh !important;
+    min-height: 100vh;
+    overflow: visible !important;
+    overflow-y: auto !important;
+  }
+  
+  /* Main presentation container becomes scrollable stack */
+  .presentation {
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+    overflow-y: auto !important;
+    position: relative !important;
+    display: block !important;
+  }
+  
+  /* ALL SLIDES VISIBLE - No more hidden slides, all stack vertically */
+  .slide {
+    position: relative !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: all !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 30px 15px !important;
+    margin-bottom: 40px !important;
+    transition: none !important;
+    will-change: auto !important;
+    animation: none !important;
+  }
+  
+  /* Override all visibility/transition classes used by JavaScript */
+  .slide.visible,
+  .slide.slide-enter-right,
+  .slide.slide-enter-left,
+  .slide.slide-exit-left,
+  .slide.slide-exit-right,
+  .slide.zoom-out-transition,
+  .slide.fade-in-transition {
+    position: relative !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: all !important;
+    animation: none !important;
+  }
+  
+  /* Slide 1 specific - first slide gets top padding adjustment */
+  #slide-1 {
+    padding-top: calc(var(--nav-h) + 15px) !important;
+    padding-bottom: 50px !important;
+  }
+  
+  /* All slide inners expand naturally */
+  .slide-inner {
+    padding: 0;
+    max-height: none !important;
+    height: auto !important;
+    width: 100%;
+  }
+  
+  /* ═══════════════════════════════════════════════════════════════════
+     HIDE NAVIGATION ELEMENTS ON MOBILE
+     No need for slide switching controls in continuous scroll mode
+     ═══════════════════════════════════════════════════════════════════ */
+  
+  /* Hide side navigation completely */
+  .nav-side {
+    display: none !important;
+  }
+  
+  /* Hide navigation dots */
+  .nav-dots {
+    display: none !important;
+  }
+  
+  /* Hide prev/next arrows */
+  .nav-arrows,
+  .nav-btn,
+  #prevBtn,
+  #nextBtn {
+    display: none !important;
+  }
+  
+  /* Keep top nav bar but simplify it */
+  .nav-bar {
+    padding: 0 12px;
+    height: 48px;
+  }
+  
+  :root {
+    --nav-h: 48px;
+  }
+  
+  .nav-logo {
+    font-size: 0.9rem;
+  }
+  
+  /* Hide progress bar on mobile - not meaningful in scroll mode */
+  .nav-progress-wrap {
+    display: none !important;
+  }
+  
+  /* Hide slide counter on mobile */
+  .nav-counter {
+    display: none !important;
+  }
+  
+  /* Keep fullscreen button visible */
+  .nav-fullscreen-btn {
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+  }
+  
+  .nav-fullscreen-btn svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -1048,20 +1152,9 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
     gap: 12px;
   }
   
-  /* ══════ SLIDE 1 MOBILE RESTRUCTURING (URGENT FIX) ══════ */
+  /* ══════ SLIDE 1 MOBILE RESTRUCTURING ══════ */
   
-  /* 1. Force #slide-1 container to flex column layout with vertical scroll */
-  #slide-1 {
-    display: flex !important;
-    position: relative !important;
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 50px !important;
-  }
-  
+  /* Slide 1 container inherits from global .slide rules above */
   #slide-1 .slide-inner {
     display: flex !important;
     flex-direction: column !important;
@@ -1480,17 +1573,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 
 /* ── 5. VERTICAL SPACING - TIGHTEN PADDING ── */
 @media (max-width: 768px) {
-  /* Minimum edge padding */
-  .slide {
-    padding: calc(var(--nav-h) + 15px) 15px 15px 15px !important;
-  }
-  
-  /* Allow slide-inner to expand naturally on mobile */
-  .slide-inner {
-    padding: 0;
-    max-height: none !important;
-    height: auto !important;
-  }
+  /* Slide padding and slide-inner are now handled in global scroll rules above */
   
   .slide-body {
     padding-right: 8px;
@@ -1548,57 +1631,17 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 
 /* ── 6. NAVIGATION ADJUSTMENTS ── */
 @media (max-width: 768px) {
-  /* Hide side navigation dots on mobile */
-  .nav-side {
-    display: none;
-  }
-  
-  /* Adjust top nav for mobile */
-  .nav-bar {
-    padding: 0 12px;
-    height: 48px;
-  }
-  
-  :root {
-    --nav-h: 48px;
-  }
-  
-  .nav-logo {
-    font-size: 0.9rem;
-  }
-  
-  .nav-progress-wrap {
-    max-width: 180px;
-    margin: 0 12px;
-  }
-  
-  .nav-counter {
-    font-size: 0.8rem;
-  }
-  
-  .nav-fullscreen-btn {
-    width: 32px;
-    height: 32px;
-    margin-left: 8px;
-  }
-  
-  .nav-fullscreen-btn svg {
-    width: 16px;
-    height: 16px;
-  }
+  /* Navigation rules now handled in global scroll section above */
+  /* This section is kept for reference but rules are consolidated */
 }
 
 /* ── 7. INTERACTIVE ELEMENTS - TOUCH FRIENDLY ── */
 @media (max-width: 768px) {
   /* Ensure minimum 44px touch targets */
-  .nav-btn,
-  .nav-dot,
   button {
     min-width: 44px;
     min-height: 44px;
   }
-  
-  .nav-fullscreen-btn {
     min-width: 44px;
     min-height: 44px;
   }
@@ -1663,14 +1706,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 
 /* ── 9. LANDSCAPE MODE OPTIMIZATION (Mobile Landscape) ── */
 @media (max-width: 768px) and (orientation: landscape) {
-  .slide {
-    padding: calc(var(--nav-h) + 10px) 15px 10px 15px !important;
-  }
-  
-  /* Slide 1 keeps scrolling in landscape */
-  #slide-1 {
-    padding-bottom: 40px !important;
-  }
+  /* Slide padding handled in global scroll rules - just adjust specific elements */
   
   .slide-title {
     font-size: 1.1rem !important;
