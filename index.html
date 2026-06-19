@@ -125,7 +125,8 @@
   <li>Data Processing &amp; Harmonization</li>
   <li>Proposed Hybrid Architecture</li>
   <li>Training Strategy &amp; Evaluation</li>
-  <li>Clinical Application &amp; Future Work</li>
+  <li>Clinical Application</li>
+  <li>Conclusion, Limitations &amp; Future Work</li>
 </ol>
     </div>
   </div>
@@ -170,7 +171,7 @@
     <div class="slide-body">
     <div class="grid-2">
   <div>
-    <h3>Four Core Research Questions</h3>
+    <h3>Core Research Questions</h3>
     <ul class="bullet-list">
       <li>How can a single deep learning pipeline simultaneously classify a cardiac condition (3 classes) AND precisely segment the left ventricle from 2D echocardiographic frames?</li>
       <li>Can competitive performance be achieved using ImageNet-pretrained backbones fine-tuned on heterogeneous echocardiographic data, without domain-specific medical pretraining?</li>
@@ -178,7 +179,7 @@
     </ul>
   </div>
   <div>
-    <h3>Four Contributions</h3>
+    <h3>Our contributions</h3>
     <div class="contrib-cards">
     <div class="card"><h3>1. Unified Classification</h3><p>A unified three-class classification framework trained on EchoNet-Dynamic, EchoNet-LVH, and CAMUS simultaneously.</p></div>
     <div class="card"><h3>2. Simultaneous Segmentation</h3><p>Simultaneous LV Cavity and LV Wall segmentation with a transformer-encoder UNet++ using a three-class unified decoder.</p></div>
@@ -394,25 +395,154 @@
     <p class="slide-subtitle">Critical for echocardiographic robustness</p>
     </div>
     <div class="slide-body">
-    <div class="table-wrap">
-<table>
-<thead><tr><th>Augmentation</th><th>Parameters</th><th>Probability</th><th>Clinical Motivation</th></tr></thead>
-<tbody>
-<tr><td>HorizontalFlip</td><td>&mdash;</td><td>p=0.50</td><td>Mirrors cardiac orientation</td></tr>
-<tr><td>ShiftScaleRotate</td><td>shift &plusmn;7%, scale &plusmn;12%, rotate &plusmn;20&deg;</td><td>p=0.70</td><td>Probe repositioning variation</td></tr>
-<tr><td>Perspective</td><td>scale 3&ndash;8%</td><td>p=0.25</td><td>Oblique probe angles</td></tr>
-<tr><td>ElasticTransform</td><td>alpha=200, sigma=10 (seg) / alpha=140, sigma=8 (clf)</td><td>p=0.40 / p=0.35</td><td>Soft tissue deformation</td></tr>
-<tr><td>GridDistortion</td><td>5 steps, distort &plusmn;0.30</td><td>p=0.25 (seg only)</td><td>Ultrasound beam distortion</td></tr>
-<tr><td>RandomBrightnessContrast</td><td>&plusmn;30% brightness, &plusmn;30% contrast</td><td>p=0.60</td><td>Gain and TGC setting differences</td></tr>
-<tr><td>CLAHE</td><td>clip_limit=4.0, grid 8&times;8</td><td>p=0.40</td><td>Inter-scanner contrast harmonization</td></tr>
-<tr><td>GaussNoise</td><td>std 0.01&ndash;0.06</td><td>p=0.35</td><td>Electronic noise simulation</td></tr>
-<tr><td>Speckle (Rayleigh)</td><td>scale=0.07</td><td>p=0.30&ndash;0.35</td><td>Coherent ultrasound speckle</td></tr>
-<tr><td>CoarseDropout</td><td>1&ndash;3 holes, size 24&ndash;48px (seg)</td><td>p=0.30</td><td>Acoustic shadowing</td></tr>
-<tr><td>Mixup (clf only)</td><td>alpha=0.20, probability=0.40</td><td>p=0.40</td><td>Smooths decision boundaries</td></tr>
-<tr><td>Normalize (ImageNet)</td><td>mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225]</td><td>Always</td><td>Match pretrained encoder statistics</td></tr>
-</tbody>
-</table>
-</div>
+    
+    <!-- Data Augmentation Pipeline - Custom HTML/CSS Implementation -->
+    <div class="aug-pipeline">
+      
+      <!-- Input Block -->
+      <div class="aug-input-block">
+        <div class="aug-input-title">Raw echocardiographic frame</div>
+        <div class="aug-input-subtitle">Input — training set sample</div>
+      </div>
+      
+      <div class="aug-arrow-down"></div>
+      
+      <!-- Stage 01: Geometric Transforms -->
+      <div class="aug-stage">
+        <div class="aug-stage-header">
+          <div class="aug-stage-number">01</div>
+          <div class="aug-stage-title">GEOMETRIC<br>TRANSFORMS</div>
+          <div class="aug-stage-subtitle">Probe & view variation</div>
+        </div>
+        <div class="aug-stage-content">
+          <div class="aug-card">
+            <div class="aug-card-title">HorizontalFlip</div>
+            <div class="aug-card-param">p = 0.50</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Mirrors cardiac orientation</div>
+          </div>
+          <div class="aug-card">
+            <div class="aug-card-title">ShiftScaleRotate</div>
+            <div class="aug-card-detail">shift ±7% · scale ±12% · rot ±20°</div>
+            <div class="aug-card-param">p = 0.70</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Probe repositioning variation</div>
+          </div>
+          <div class="aug-card">
+            <div class="aug-card-title">Perspective + Elastic</div>
+            <div class="aug-card-detail">scale 3–8% · α 140–200 / σ 8–10</div>
+            <div class="aug-card-param">p = 0.25 / p = 0.35–0.40</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Oblique angles · soft-tissue deform</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="aug-arrow-down"></div>
+      
+      <!-- Stage 02: Intensity & Contrast -->
+      <div class="aug-stage">
+        <div class="aug-stage-header">
+          <div class="aug-stage-number">02</div>
+          <div class="aug-stage-title">INTENSITY &<br>CONTRAST</div>
+          <div class="aug-stage-subtitle">Gain, TGC & scanner diff</div>
+        </div>
+        <div class="aug-stage-content">
+          <div class="aug-card">
+            <div class="aug-card-title">RandomBrightnessContrast</div>
+            <div class="aug-card-detail">±30% brightness · ±30% contrast</div>
+            <div class="aug-card-param">p = 0.60</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Gain & TGC differences</div>
+          </div>
+          <div class="aug-card">
+            <div class="aug-card-title">CLAHE</div>
+            <div class="aug-card-detail">clip_limit=4.0 · grid 8×8</div>
+            <div class="aug-card-param">p = 0.40</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Inter-scanner harmonization</div>
+          </div>
+          <div class="aug-card">
+            <div class="aug-card-title">GaussNoise</div>
+            <div class="aug-card-detail">std 0.01–0.06</div>
+            <div class="aug-card-param">p = 0.35</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Electronic noise simulation</div>
+          </div>
+          <div class="aug-card">
+            <div class="aug-card-title">Speckle</div>
+            <div class="aug-card-detail">Rayleigh · scale=0.07</div>
+            <div class="aug-card-param">p = 0.30–0.35</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Ultrasound speckle pattern</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="aug-arrow-down"></div>
+      
+      <!-- Stage 03: Ultrasound-Specific -->
+      <div class="aug-stage">
+        <div class="aug-stage-header">
+          <div class="aug-stage-number">03</div>
+          <div class="aug-stage-title">ULTRASOUND<br>SPECIFIC</div>
+          <div class="aug-stage-subtitle">Artifacts & shadowing</div>
+        </div>
+        <div class="aug-stage-content">
+          <div class="aug-card">
+            <div class="aug-card-title">GridDistortion</div>
+            <div class="aug-card-detail">5 steps</div>
+            <div class="aug-card-param">p = 0.25</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Ultrasound beam distortion</div>
+          </div>
+          <div class="aug-card">
+            <div class="aug-card-title">CoarseDropout</div>
+            <div class="aug-card-detail">1–3 holes · 24–48px</div>
+            <div class="aug-card-param">p = 0.30</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Acoustic shadowing</div>
+          </div>
+          <div class="aug-card">
+            <div class="aug-card-title">Mixup (clf only)</div>
+            <div class="aug-card-detail">alpha=0.20</div>
+            <div class="aug-card-param">p = 0.40</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Smooths boundaries</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="aug-arrow-down"></div>
+      
+      <!-- Stage 04: Normalization -->
+      <div class="aug-stage">
+        <div class="aug-stage-header">
+          <div class="aug-stage-number">04</div>
+          <div class="aug-stage-title">NORMALIZE</div>
+          <div class="aug-stage-subtitle">ImageNet statistics</div>
+        </div>
+        <div class="aug-stage-content aug-stage-content-wide">
+          <div class="aug-card aug-card-wide">
+            <div class="aug-card-title">ImageNet Normalize</div>
+            <div class="aug-card-detail">mean=[0.485, 0.456, 0.406] · std=[0.229, 0.224, 0.225]</div>
+            <div class="aug-card-param">Always applied</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Match pretrained encoder statistics · enables transfer learning</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="aug-arrow-down"></div>
+      
+      <!-- Output Block -->
+      <div class="aug-output-block">
+        <div class="aug-output-title">Model input</div>
+        <div class="aug-output-subtitle">Classification network / Segmentation network</div>
+      </div>
+      
+    </div>
+    
     </div>
   </div>
 </section>
