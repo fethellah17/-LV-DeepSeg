@@ -2223,6 +2223,125 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
     font-size: 0.8rem;
     margin-bottom: 6px;
   }
+  
+  /* ── SLIDE 9 SPECIFIC: Manifest File and Dataset Split Strategy ── */
+  #slide-9 .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+  
+  #slide-9 .card {
+    padding: 10px 12px;
+  }
+  
+  #slide-9 .card h3 {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+  
+  #slide-9 .card p {
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  
+  #slide-9 h3 {
+    font-size: 0.9rem !important;
+    margin-bottom: 10px !important;
+  }
+  
+  #slide-9 .bullet-list li {
+    font-size: 0.8rem !important;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    padding-left: 16px;
+  }
+  
+  #slide-9 .bullet-list li strong {
+    font-size: 0.8rem;
+  }
+  
+  #slide-9 .table-wrap {
+    overflow-x: auto !important;
+    font-size: 0.7rem;
+  }
+  
+  #slide-9 table {
+    min-width: 550px;
+    font-size: 0.7rem !important;
+  }
+  
+  #slide-9 th {
+    padding: 7px 8px !important;
+    font-size: 0.7rem !important;
+  }
+  
+  #slide-9 td {
+    padding: 6px 8px !important;
+    font-size: 0.68rem !important;
+    line-height: 1.4;
+  }
+  
+  /* ── SLIDE 17 SPECIFIC: Loss Functions ── */
+  #slide-17 .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+  
+  #slide-17 h3 {
+    font-size: 0.9rem !important;
+    margin-bottom: 10px !important;
+    line-height: 1.4;
+  }
+  
+  #slide-17 .bullet-list li {
+    font-size: 0.78rem !important;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    padding-left: 16px;
+  }
+  
+  #slide-17 .bullet-list li strong {
+    font-size: 0.78rem;
+  }
+  
+  #slide-17 .table-wrap {
+    overflow-x: auto !important;
+    margin-top: 10px;
+  }
+  
+  #slide-17 table {
+    min-width: 100%;
+    font-size: 0.72rem !important;
+  }
+  
+  #slide-17 th {
+    padding: 8px 10px !important;
+    font-size: 0.72rem !important;
+    white-space: nowrap;
+  }
+  
+  #slide-17 td {
+    padding: 7px 10px !important;
+    font-size: 0.7rem !important;
+    line-height: 1.45;
+  }
+  
+  /* Make the loss function table more mobile-friendly */
+  #slide-17 tbody td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  #slide-17 tbody td:nth-child(2) {
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  
+  #slide-17 tbody td:last-child {
+    font-size: 0.68rem !important;
+    line-height: 1.4;
+  }
 }
 
 /* ── 6. NAVIGATION ADJUSTMENTS ── */
