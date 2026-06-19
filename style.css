@@ -1442,6 +1442,66 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 #slide-11 .bullet-list li, #slide-13 .bullet-list li, #slide-18 .bullet-list li, #slide-20 .bullet-list li,
 #slide-22 .bullet-list li, #slide-23 .bullet-list li, #slide-24 .bullet-list li { font-size: 1em; margin-bottom: 0.7em; }
 
+/* ── Slide 19 Desktop-Only Font Sizes (Match Slide 15) ── */
+/* Apply only on desktop screens (min-width: 769px) to fix small font issue */
+@media (min-width: 769px) {
+  /* Base font size for slide-inner - matches Slide 15 */
+  #slide-19 .slide-inner {
+    font-size: 1.18vw;
+  }
+
+  /* Reset text inside to use em-based scaling - matches Slide 15 pattern */
+  #slide-19 .slide-inner * {
+    font-size: revert;
+  }
+
+  /* Slide title font size - matches Slide 15 */
+  #slide-19 .slide-title {
+    font-size: clamp(1.6rem, 2.2em, 2.6rem);
+  }
+
+  /* Bullet list items - matches Slide 15 pattern */
+  #slide-19 .bullet-list li {
+    font-size: 1em;
+    margin-bottom: 0.7em;
+  }
+}
+
+/* ── Slide 21 Desktop-Only Font Sizes (Match Slide 15) ── */
+/* Apply only on desktop screens (min-width: 769px) for visual consistency */
+@media (min-width: 769px) {
+  /* Base font size for slide-inner - matches Slide 15 */
+  #slide-21 .slide-inner {
+    font-size: 1.18vw;
+  }
+
+  /* Reset text inside to use em-based scaling - matches Slide 15 pattern */
+  #slide-21 .slide-inner * {
+    font-size: revert;
+  }
+
+  /* Slide title font size - matches Slide 15 */
+  #slide-21 .slide-title {
+    font-size: clamp(1.6rem, 2.2em, 2.6rem);
+  }
+
+  /* H3 headings - consistent sizing */
+  #slide-21 h3 {
+    font-size: 1em;
+  }
+
+  /* Bullet list items - matches Slide 15 pattern */
+  #slide-21 .bullet-list li {
+    font-size: 1em;
+    margin-bottom: 0.7em;
+  }
+
+  /* Figure captions - consistent sizing */
+  #slide-21 .figure-caption {
+    font-size: 0.82rem;
+  }
+}
+
 /* ── Per-element entrance animations ── */
 
 /* Keyframes */

@@ -154,7 +154,6 @@
       <li>Manual analysis is time-consuming, operator-dependent, and produces significant inter-observer variability.</li>
       <li>Three cardiac conditions are targeted: Normal, HFrEF, and LVH/HCM.</li>
       <li>These three conditions are encountered daily in Algerian cardiology departments, including CHU Oran.</li>
-      <li>Our proprietary dataset, Echo3C, was curated using clinical data from CHU Oran.</li>
       <li>Automated deep learning analysis can accelerate diagnosis, reduce human error, and provide explainable clinical reports.</li>
     </ul>
   </div>
@@ -185,7 +184,8 @@
     <div class="card"><h3>1. Unified Classification</h3><p>A unified three-class classification framework trained on EchoNet-Dynamic, EchoNet-LVH, and CAMUS simultaneously.</p></div>
     <div class="card"><h3>2. Simultaneous Segmentation</h3><p>Simultaneous LV Cavity and LV Wall segmentation with a transformer-encoder UNet++ using a three-class unified decoder.</p></div>
     <div class="card"><h3>3. XAI Explainability</h3><p>A complete XAI explainability analysis (Grad-CAM++ and Attention Rollout) for all six classifiers.</p></div>
-    <div class="card"><h3>4. LV-DeepSeg Application</h3><p>A clinical desktop application with integrated LLM report generation via the Anthropic Claude API.</p></div>
+    <div class="card"><h3>4. Echo3C Dataset</h3><p>Our proprietary dataset, Echo3C, was curated using clinical data from CHU Oran.</p></div>
+    <div class="card"><h3>5. LV-DeepSeg Application</h3><p>A clinical desktop application with integrated LLM report generation via the Anthropic Claude API.</p></div>
     </div>
   </div>
 </div>
@@ -566,12 +566,12 @@
 <table>
 <thead><tr><th>Model</th><th>Family</th><th>Transformer?</th><th>Pretrained</th><th>Backbone Freeze</th></tr></thead>
 <tbody>
-<tr class="highlight-row"><td>Swin-Tiny (Our)</td><td>Hierarchical Vision Transformer</td><td>YES</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
-<tr><td>ConvNeXt-Small (Custom)</td><td>Modern CNN (transformer-inspired)</td><td>PARTIAL</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
-<tr><td>ResNet-50 (Custom)</td><td>Classic Residual CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
-<tr><td>EfficientNet-B4 (Custom)</td><td>Compound-scaled CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
-<tr><td>VGG-16 (Custom)</td><td>Deep Sequential CNN</td><td>NO</td><td>ImageNet (torchvision)</td><td>Fine-tuned from epoch 1</td></tr>
-<tr><td>Classic CNN (Custom)</td><td>Custom 5-Block Sequential CNN</td><td>NO</td><td>NONE &mdash; random init</td><td>No freeze</td></tr>
+<tr class="highlight-row"><td>Swin-Tiny <small></small>(Our)</small></td><td>Hierarchical Vision Transformer</td><td>YES</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>ConvNeXt-Small <small>(Custom)</small></td><td>Modern CNN (transformer-inspired)</td><td>PARTIAL</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>ResNet-50 <small>(Custom)</small></td><td>Classic Residual CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>EfficientNet-B4 <small>(Custom)</small></td><td>Compound-scaled CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>VGG-16 <small>(Custom)</small></td><td>Deep Sequential CNN</td><td>NO</td><td>ImageNet (torchvision)</td><td>Fine-tuned from epoch 1</td></tr>
+<tr><td>Classic CNN <small>(Custom)</small></td><td>Custom 5-Block Sequential CNN</td><td>NO</td><td>NONE &mdash; random init</td><td>No freeze</td></tr>
 </tbody>
 </table>
 </div>
@@ -631,10 +631,10 @@
 <table>
 <thead><tr><th>Model</th><th>Architecture</th><th>Encoder</th><th>Classes</th><th>Key Characteristic</th></tr></thead>
 <tbody>
-<tr class="highlight-row"><td>UNet++</td><td>Nested Dense Skip Connections</td><td>MiT-B3 (SegFormer)</td><td>3: BG / LV Cavity / LV Wall</td><td>Selected as final best model</td></tr>
-<tr><td>FPN</td><td>Feature Pyramid Network</td><td>MiT-B3 (SegFormer)</td><td>3: BG / LV Cavity / LV Wall</td><td>Best checkpoint at epoch 2</td></tr>
-<tr><td>MANet</td><td>Multi-scale Attention Network</td><td>EfficientNet-B5</td><td>3: BG / LV Cavity / LV Wall</td><td>Lower LR (5e-5) and grad_clip=0.5</td></tr>
-<tr><td>MedSAM</td><td>SAM Adaptation</td><td>ViT-B (frozen, SA-1B)</td><td>3: BG / LV Cavity / LV Wall</td><td>Near-zero LV Wall Dice (0.0002) at 53 epochs</td></tr>
+<tr class="highlight-row"><td>UNet++ <small>(Our)</small></td><td>Nested Dense Skip Connections</td><td>MiT-B3 (SegFormer)</td><td>3: BG / LV Cavity / LV Wall</td><td>Selected as final best model</td></tr>
+<tr><td>FPN <small>(Custom)</small></td><td>Feature Pyramid Network</td><td>MiT-B3 (SegFormer)</td><td>3: BG / LV Cavity / LV Wall</td><td>Best checkpoint at epoch 2</td></tr>
+<tr><td>MANet <small>(Custom)</small></td><td>Multi-scale Attention Network</td><td>EfficientNet-B5</td><td>3: BG / LV Cavity / LV Wall</td><td>Lower LR (5e-5) and grad_clip=0.5</td></tr>
+<tr><td>MedSAM <small>(Custom)</small></td><td>SAM Adaptation</td><td>ViT-B (frozen, SA-1B)</td><td>3: BG / LV Cavity / LV Wall</td><td>Near-zero LV Wall Dice (0.0002) at 53 epochs</td></tr>
 </tbody>
 </table>
 </div>
@@ -722,7 +722,7 @@
     <thead><tr><th>Loss Term</th><th>Weight</th><th>Purpose</th></tr></thead>
     <tbody>
     <tr><td>SoftDiceLoss</td><td>45%</td><td>Primary overlap metric &mdash; optimizes Dice score</td></tr>
-    <tr><td>TopKCELoss</td><td>35%</td><td>Online Hard Example Mining &mdash; top 50% hardest pixels</td></tr>
+    <tr><td>TopKCELoss</td><td>35%</td><td>Online Hard Example Mining &mdash; top 50% Damaged pixels</td></tr>
     <tr><td>BoundaryLoss</td><td>20%</td><td>Penalizes errors at LV endocardial/epicardial borders</td></tr>
     </tbody>
     </table>
@@ -781,12 +781,12 @@
 <table>
 <thead><tr><th>Model</th><th>Accuracy</th><th>F1-Macro</th><th>ROC-AUC</th><th>MCC</th><th>Log Loss</th></tr></thead>
 <tbody>
-<tr class="highlight-row"><td>Swin-Tiny (best)</td><td>92.36%</td><td>0.9295</td><td>0.9827</td><td>0.8814</td><td>0.2431</td></tr>
-<tr><td>Classic-CNN</td><td>88.53%</td><td>0.8937</td><td>0.9673</td><td>0.8234</td><td>0.3769</td></tr>
-<tr><td>ConvNeXt-Small</td><td>88.84%</td><td>0.8961</td><td>0.9662</td><td>0.8268</td><td>0.3664</td></tr>
-<tr><td>ResNet-50</td><td>87.60%</td><td>0.8860</td><td>0.9670</td><td>0.8083</td><td>0.3111</td></tr>
-<tr><td>VGG-16</td><td>87.82%</td><td>0.8741</td><td>0.9512</td><td>0.8156</td><td>0.3812</td></tr>
-<tr><td>EfficientNet-B4</td><td>85.33%</td><td>0.8666</td><td>0.9525</td><td>0.7768</td><td>0.3983</td></tr>
+<tr class="highlight-row"><td>Swin-Tiny (best)</td><td>0.9236</td><td>0.9295</td><td>0.9827</td><td>0.8814</td><td>0.2431</td></tr>
+<tr><td>Classic-CNN</td><td>0.8853</td><td>0.8937</td><td>0.9673</td><td>0.8234</td><td>0.3769</td></tr>
+<tr><td>ConvNeXt-Small</td><td>0.8884</td><td>0.8961</td><td>0.9662</td><td>0.8268</td><td>0.3664</td></tr>
+<tr><td>ResNet-50</td><td>0.8760</td><td>0.8860</td><td>0.9670</td><td>0.8083</td><td>0.3111</td></tr>
+<tr><td>VGG-16</td><td>0.8782</td><td>0.8741</td><td>0.9512</td><td>0.8156</td><td>0.3812</td></tr>
+<tr><td>EfficientNet-B4</td><td>0.8533</td><td>0.8666</td><td>0.9525</td><td>0.7768</td><td>0.3983</td></tr>
 </tbody>
 </table>
 </div>
@@ -849,9 +849,9 @@
 <table>
 <thead><tr><th>Model</th><th>Dice FG</th><th>Dice Cav</th><th>Dice Wall</th><th>IoU Cav</th><th>IoU Wall</th><th>Pixel Acc</th></tr></thead>
 <tbody>
-<tr class="highlight-row"><td>UNet++ (best)</td><td>0.9111</td><td>0.9439</td><td>0.8784</td><td>0.8937</td><td>0.7832</td><td>97.46%</td></tr>
-<tr><td>FPN</td><td>0.9098</td><td>0.9427</td><td>0.8769</td><td>0.8916</td><td>0.7809</td><td>97.45%</td></tr>
-<tr><td>MANet</td><td>0.8782</td><td>0.9251</td><td>0.8313</td><td>0.8606</td><td>0.7113</td><td>96.49%</td></tr>
+<tr class="highlight-row"><td>UNet++ (best)</td><td>0.9111</td><td>0.9439</td><td>0.8784</td><td>0.8937</td><td>0.7832</td><td>0.9746</td></tr>
+<tr><td>FPN</td><td>0.9098</td><td>0.9427</td><td>0.8769</td><td>0.8916</td><td>0.7809</td><td>0.9745</td></tr>
+<tr><td>MANet</td><td>0.8782</td><td>0.9251</td><td>0.8313</td><td>0.8606</td><td>0.7113</td><td>0.9649</td></tr>
 <tr><td>MedSAM</td><td>0.2623</td><td>0.5243</td><td>0.0002</td><td>0.3553</td><td>0.0001</td><td>&lt; 1%</td></tr>
 </tbody>
 </table>
