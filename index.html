@@ -173,7 +173,7 @@
   <div>
     <h3>Core Research Questions</h3>
     <ul class="bullet-list">
-      <li>How can a single deep learning pipeline simultaneously classify a cardiac condition (3 classes) AND precisely segment the left ventricle from 2D echocardiographic frames?</li>
+      <li>Can we improve diagnostic accuracy using a cascaded framework, where classification decisions are informed by the anatomical and volumetric features derived from LV segmentation?</li>
       <li>Can competitive performance be achieved using ImageNet-pretrained backbones fine-tuned on heterogeneous echocardiographic data, without domain-specific medical pretraining?</li>
       <li>Which architecture &mdash; transformer-based or convolutional &mdash; generalizes more effectively across three heterogeneous datasets?</li>
     </ul>
@@ -181,8 +181,8 @@
   <div>
     <h3>Our contributions</h3>
     <div class="contrib-cards">
-    <div class="card"><h3>1. Unified Classification</h3><p>A unified three-class classification framework trained on EchoNet-Dynamic, EchoNet-LVH, and CAMUS simultaneously.</p></div>
-    <div class="card"><h3>2. Simultaneous Segmentation</h3><p>Simultaneous LV Cavity and LV Wall segmentation with a transformer-encoder UNet++ using a three-class unified decoder.</p></div>
+    <div class="card"><h3>1. Feature-Informed Classification</h3><p>A classification framework that leverages anatomical and geometric features extracted from the segmentation module to refine cardiac condition diagnosis.</p></div>
+    <div class="card"><h3>2. Anatomical Segmentation Module</h3><p>A robust segmentation module for LV Cavity and Wall that provides essential anatomical inputs to the downstream classification framework.</p></div>
     <div class="card"><h3>3. XAI Explainability</h3><p>A complete XAI explainability analysis (Grad-CAM++ and Attention Rollout) for all six classifiers.</p></div>
     <div class="card"><h3>4. Echo3C Dataset</h3><p>Our proprietary dataset, Echo3C, was curated using clinical data from CHU Oran.</p></div>
     <div class="card"><h3>5. LV-DeepSeg Application</h3><p>A clinical desktop application with integrated LLM report generation via the Anthropic Claude API.</p></div>
