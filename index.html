@@ -19,7 +19,7 @@
   <nav class="nav-bar">
     <div class="nav-logo">LV-DeepSeg</div>
     <div class="nav-progress-wrap"><div class="nav-progress" id="progressBar"></div></div>
-    <div class="nav-counter" id="slideCounter">1 / 25</div>
+    <div class="nav-counter" id="slideCounter">1 / 24</div>
     <button class="nav-fullscreen-btn" id="fullscreenBtn" aria-label="Toggle fullscreen" title="Fullscreen (F)">
       <svg id="fsIconEnter" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
       <svg id="fsIconExit" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
@@ -154,6 +154,7 @@
       <li>Manual analysis is time-consuming, operator-dependent, and produces significant inter-observer variability.</li>
       <li>Three cardiac conditions are targeted: Normal, HFrEF, and LVH/HCM.</li>
       <li>These three conditions are encountered daily in Algerian cardiology departments, including CHU Oran.</li>
+      <li>Our proprietary dataset, Echo3C, was curated using clinical data from CHU Oran.</li>
       <li>Automated deep learning analysis can accelerate diagnosis, reduce human error, and provide explainable clinical reports.</li>
     </ul>
   </div>
@@ -206,7 +207,7 @@
 <tr><td>EchoNet-Dynamic</td><td>Stanford University (public)</td><td>AVI video + FileList.csv + VolumeTracings.csv</td><td>Apical 4-chamber cine loops</td><td>10,030 patients</td><td>EF value &mdash; Normal (EF &ge; 55%) or HFrEF (EF &le; 40%). Grey zone 40&ndash;54% excluded.</td><td>Classification + Segmentation (LV Cavity only)</td></tr>
 <tr><td>EchoNet-LVH</td><td>Stanford University (public)</td><td>AVI video + MeasurementsList.csv (Batch 1&ndash;4)</td><td>Parasternal long-axis views</td><td>~12,000 labeled frames extracted</td><td>IVSd &gt; 1.1 cm or LVPWd &gt; 1.1 cm &rarr; LVH/HCM label</td><td>Classification only</td></tr>
 <tr><td>CAMUS</td><td>CREATIS Lab, INSA Lyon (public)</td><td>NIfTI (.nii.gz) + official split TXT files</td><td>Apical 2CH and 4CH at ED and ES phases</td><td>500 patients &times; 4 frames = 2,000 frames</td><td>Expert manual contours: BG=0, LV Cavity=1, LV Myocardium=2, LA=3 (remapped to 0)</td><td>Segmentation (LV Cavity + LV Wall)</td></tr>
-<tr><td>CHU Oran (local)</td><td>Cardiology Dept., CHU Oran, Algeria</td><td>Digital echo images</td><td>Local clinical acquisitions</td><td>Used as independent validation set</td><td>Authorized by Prof. N. Laredj Ep. Abdelmalek on January 29, 2026</td><td>Independent clinical validation</td></tr>
+<tr><td>Echo3C (Our)</td><td>Cardiology Dept., CHU Oran, Algeria</td><td>Digital echo images</td><td>Local clinical acquisitions</td><td>Used as independent validation set</td><td>Authorized by Prof. N. Laredj Ep. Abdelmalek on January 29, 2026</td><td>Independent clinical validation</td></tr>
 </tbody>
 </table>
 </div>
@@ -470,11 +471,11 @@
             <div class="aug-card-desc">Electronic noise simulation</div>
           </div>
           <div class="aug-card">
-            <div class="aug-card-title">Speckle</div>
-            <div class="aug-card-detail">Rayleigh · scale=0.07</div>
-            <div class="aug-card-param">p = 0.30–0.35</div>
+            <div class="aug-card-title">GridDistortion</div>
+            <div class="aug-card-detail">5 steps . distort ±0.30</div>
+            <div class="aug-card-param">p = 0.25</div>
             <div class="aug-card-divider"></div>
-            <div class="aug-card-desc">Ultrasound speckle pattern</div>
+            <div class="aug-card-desc">Ultrasound beam distortion</div>
           </div>
         </div>
       </div>
@@ -485,23 +486,30 @@
       <div class="aug-stage">
         <div class="aug-stage-header">
           <div class="aug-stage-number">03</div>
-          <div class="aug-stage-title">ULTRASOUND<br>SPECIFIC</div>
-          <div class="aug-stage-subtitle">Artifacts & shadowing</div>
+          <div class="aug-stage-title">US-SPECIFIC<br>NOISE</div>
+          <div class="aug-stage-subtitle">Speckle & Shadowing simulation</div>
         </div>
         <div class="aug-stage-content">
           <div class="aug-card">
-            <div class="aug-card-title">GridDistortion</div>
-            <div class="aug-card-detail">5 steps</div>
-            <div class="aug-card-param">p = 0.25</div>
+            <div class="aug-card-title">Speckle</div>
+            <div class="aug-card-detail">Rayleigh · scale=0.07</div>
+            <div class="aug-card-param">p = 0.30–0.35</div>
             <div class="aug-card-divider"></div>
-            <div class="aug-card-desc">Ultrasound beam distortion</div>
+            <div class="aug-card-desc">Coherent ultrasound speckle simulation</div>
+          </div>
+          <div class="aug-card">
+            <div class="aug-card-title">GaussNoise (fine)</div>
+            <div class="aug-card-detail">std 0.01–0.06</div>
+            <div class="aug-card-param">with stage 02 term</div>
+            <div class="aug-card-divider"></div>
+            <div class="aug-card-desc">Full sensor-level noise approximation</div>
           </div>
           <div class="aug-card">
             <div class="aug-card-title">CoarseDropout</div>
             <div class="aug-card-detail">1–3 holes · 24–48px</div>
-            <div class="aug-card-param">p = 0.30</div>
+            <div class="aug-card-param">p = 0.30 (seg only)</div>
             <div class="aug-card-divider"></div>
-            <div class="aug-card-desc">Acoustic shadowing</div>
+            <div class="aug-card-desc">Acoustic shadowing _ rib / lung occlusion</div>
           </div>
           <div class="aug-card">
             <div class="aug-card-title">Mixup (clf only)</div>
@@ -528,7 +536,6 @@
             <div class="aug-card-detail">mean=[0.485, 0.456, 0.406] · std=[0.229, 0.224, 0.225]</div>
             <div class="aug-card-param">Always applied</div>
             <div class="aug-card-divider"></div>
-            <div class="aug-card-desc">Match pretrained encoder statistics · enables transfer learning</div>
           </div>
         </div>
       </div>
@@ -559,12 +566,12 @@
 <table>
 <thead><tr><th>Model</th><th>Family</th><th>Transformer?</th><th>Pretrained</th><th>Backbone Freeze</th></tr></thead>
 <tbody>
-<tr class="highlight-row"><td>Swin-Tiny</td><td>Hierarchical Vision Transformer</td><td>YES</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
-<tr><td>ConvNeXt-Small</td><td>Modern CNN (transformer-inspired)</td><td>PARTIAL</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
-<tr><td>ResNet-50</td><td>Classic Residual CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
-<tr><td>EfficientNet-B4</td><td>Compound-scaled CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
-<tr><td>VGG-16</td><td>Deep Sequential CNN</td><td>NO</td><td>ImageNet (torchvision)</td><td>Fine-tuned from epoch 1</td></tr>
-<tr><td>Classic CNN</td><td>Custom 5-Block Sequential CNN</td><td>NO</td><td>NONE &mdash; random init</td><td>No freeze</td></tr>
+<tr class="highlight-row"><td>Swin-Tiny (Our)</td><td>Hierarchical Vision Transformer</td><td>YES</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>ConvNeXt-Small (Custom)</td><td>Modern CNN (transformer-inspired)</td><td>PARTIAL</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>ResNet-50 (Custom)</td><td>Classic Residual CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>EfficientNet-B4 (Custom)</td><td>Compound-scaled CNN</td><td>NO</td><td>ImageNet (timm)</td><td>Frozen 5 epochs then fully unfrozen</td></tr>
+<tr><td>VGG-16 (Custom)</td><td>Deep Sequential CNN</td><td>NO</td><td>ImageNet (torchvision)</td><td>Fine-tuned from epoch 1</td></tr>
+<tr><td>Classic CNN (Custom)</td><td>Custom 5-Block Sequential CNN</td><td>NO</td><td>NONE &mdash; random init</td><td>No freeze</td></tr>
 </tbody>
 </table>
 </div>
@@ -691,42 +698,7 @@
   </div>
 </section>
 
-<section class="slide slide-training-config" id="slide-16" data-slide="16">
-  <div class="slide-inner stagger">
-    <div class="slide-header">
-    <span class="slide-tag">Training</span>
-    <h2 class="slide-title">Training Configuration and Batch Strategy</h2>
-    <p class="slide-subtitle">RTX 4060 Laptop GPU &mdash; 8 GB VRAM &mdash; Visual Studio Code</p>
-    </div>
-    <div class="slide-body">
-    <div class="table-wrap">
-<table>
-<thead><tr><th>Parameter</th><th>Classification</th><th>Segmentation</th></tr></thead>
-<tbody>
-<tr><td>Batch Size</td><td>16 samples</td><td>4 samples</td></tr>
-<tr><td>Input Resolution</td><td>224 &times; 224 pixels</td><td>384 &times; 384 pixels</td></tr>
-<tr><td>Max Epochs</td><td>80</td><td>100</td></tr>
-<tr><td>Early Stopping Patience</td><td>18 epochs (multi-signal: loss + F1 + Acc)</td><td>20 epochs (LV Cavity Dice)</td></tr>
-<tr><td>Optimizer</td><td>AdamW</td><td>AdamW</td></tr>
-<tr><td>Base Learning Rate</td><td>2e-4</td><td>2e-4 (MANet: 5e-5)</td></tr>
-<tr><td>Minimum Learning Rate</td><td>1e-6</td><td>5e-7</td></tr>
-<tr><td>LR Schedule</td><td>Linear warmup (5 ep) + Cosine Annealing</td><td>Same</td></tr>
-<tr><td>LLRD (backbone vs head)</td><td>Backbone: 0.10 &times; base LR / Head: base LR</td><td>N/A</td></tr>
-<tr><td>Weight Decay</td><td>1e-4</td><td>1e-4</td></tr>
-<tr><td>Gradient Clipping</td><td>max norm = 1.0</td><td>max norm = 1.0 (MANet: 0.5)</td></tr>
-<tr><td>AMP Mixed Precision</td><td>fp16 forward + fp32 weights</td><td>fp16 forward + fp32 weights</td></tr>
-<tr><td>Backbone Freeze Phase</td><td>5 epochs frozen then unfrozen</td><td>N/A</td></tr>
-<tr><td>Mixup</td><td>alpha=0.20, prob=0.40</td><td>Not used</td></tr>
-<tr><td>TTA at test time</td><td>Not used</td><td>8-fold TTA</td></tr>
-<tr><td>Random Seed</td><td>42</td><td>42</td></tr>
-</tbody>
-</table>
-</div>
-    </div>
-  </div>
-</section>
-
-<section class="slide" id="slide-17" data-slide="17">
+<section class="slide" id="slide-16" data-slide="16">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Training</span>
@@ -761,7 +733,7 @@
   </div>
 </section>
 
-<section class="slide" id="slide-18" data-slide="18">
+<section class="slide" id="slide-17" data-slide="17">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Metrics</span>
@@ -797,7 +769,7 @@
   </div>
 </section>
 
-<section class="slide" id="slide-19" data-slide="19" data-chart="classification">
+<section class="slide" id="slide-18" data-slide="18" data-chart="classification">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Results</span>
@@ -835,7 +807,7 @@
   </div>
 </section>
 
-<section class="slide" id="slide-20" data-slide="20">
+<section class="slide" id="slide-19" data-slide="19">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Explainability</span>
@@ -866,7 +838,7 @@
   </div>
 </section>
 
-<section class="slide" id="slide-21" data-slide="21" data-chart="segmentation">
+<section class="slide" id="slide-20" data-slide="20" data-chart="segmentation">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Results</span>
@@ -899,7 +871,7 @@
   </div>
 </section>
 
-<section class="slide" id="slide-22" data-slide="22">
+<section class="slide" id="slide-21" data-slide="21">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Results</span>
@@ -938,7 +910,7 @@
   </div>
 </section>
 
-<section class="slide" id="slide-23" data-slide="23">
+<section class="slide" id="slide-22" data-slide="22">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Results</span>
@@ -981,7 +953,7 @@
   </div>
 </section>
 
-<section class="slide" id="slide-24" data-slide="24">
+<section class="slide" id="slide-23" data-slide="23">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Application</span>
@@ -1009,7 +981,7 @@
   </div>
 </section>
 
-<section class="slide" id="slide-25" data-slide="25">
+<section class="slide" id="slide-24" data-slide="24">
   <div class="slide-inner stagger">
     <div class="slide-header">
     <span class="slide-tag">Conclusion</span>

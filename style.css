@@ -818,17 +818,6 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
   margin-bottom: 8px; line-height: 1.3;
 }
 
-/* Slide 15 — full training table visible */
-.slide-training-config .slide-body { overflow-y: auto; }
-.slide-training-config .table-wrap {
-  max-height: none;
-  font-size: 0.84rem;
-}
-.slide-training-config .table-wrap th,
-.slide-training-config .table-wrap td {
-  padding: 7px 10px;
-}
-
 /* Figure column fills grid cell */
 .figure-col { display: flex; flex-direction: column; min-height: 0; }
 .figure-col .figure-wrap { flex: 1; }
@@ -1390,21 +1379,21 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 #slide-13 .slide-inner { font-size: 1.28vw; }
 #slide-14 .slide-inner { font-size: 1.20vw; } /* new UNet++ image slide */
 #slide-15 .slide-inner { font-size: 1.18vw; } /* was 14 — Architecture Additions */
+#slide-16 .slide-inner { font-size: 1.18vw; } /* Loss functions — matches Slide 15 */
 #slide-17 .slide-inner { font-size: 1.18vw; } /* was 16 — Loss functions */
 #slide-18 .slide-inner { font-size: 1.18vw; } /* was 17 — Metrics */
 #slide-20 .slide-inner { font-size: 1.18vw; } /* Explainability */
 #slide-22 .slide-inner { font-size: 1.18vw; } /* Training Loss Curves */
 #slide-23 .slide-inner { font-size: 1.18vw; } /* Confusion Matrices */
-#slide-24 .slide-inner { font-size: 1.18vw; } /* was 23 — Application */
-#slide-25 .slide-inner { font-size: 1.18vw; } /* was 24 — Conclusion */
+#slide-24 .slide-inner { font-size: 1.18vw; } /* Conclusion */
 
 /* All text inside zoomed slide-inner uses em so it scales with the above */
 #slide-2 .slide-inner *,  #slide-3 .slide-inner *,  #slide-4 .slide-inner *,  #slide-5 .slide-inner *,
 #slide-6 .slide-inner *,  #slide-7 .slide-inner *,  #slide-8 .slide-inner *,  #slide-9 .slide-inner *,
 #slide-10 .slide-inner *, #slide-11 .slide-inner *, #slide-12 .slide-inner *,
-#slide-13 .slide-inner *, #slide-14 .slide-inner *, #slide-15 .slide-inner *,
+#slide-13 .slide-inner *, #slide-14 .slide-inner *, #slide-15 .slide-inner *, #slide-16 .slide-inner *,
 #slide-17 .slide-inner *, #slide-18 .slide-inner *, #slide-20 .slide-inner *,
-#slide-22 .slide-inner *, #slide-23 .slide-inner *, #slide-24 .slide-inner *, #slide-25 .slide-inner * {
+#slide-22 .slide-inner *, #slide-23 .slide-inner *, #slide-24 .slide-inner * {
   font-size: revert;
 }
 
@@ -1412,15 +1401,15 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 #slide-2 .slide-title,  #slide-3 .slide-title,  #slide-4 .slide-title,  #slide-5 .slide-title,
 #slide-6 .slide-title,  #slide-7 .slide-title,  #slide-8 .slide-title,  #slide-9 .slide-title,
 #slide-10 .slide-title, #slide-11 .slide-title, #slide-12 .slide-title,
-#slide-13 .slide-title, #slide-14 .slide-title, #slide-15 .slide-title,
+#slide-13 .slide-title, #slide-14 .slide-title, #slide-15 .slide-title, #slide-16 .slide-title,
 #slide-17 .slide-title, #slide-18 .slide-title, #slide-20 .slide-title,
-#slide-22 .slide-title, #slide-23 .slide-title, #slide-24 .slide-title, #slide-25 .slide-title { font-size: clamp(1.6rem, 2.2em, 2.6rem); }
+#slide-22 .slide-title, #slide-23 .slide-title, #slide-24 .slide-title { font-size: clamp(1.6rem, 2.2em, 2.6rem); }
 
 /* Table */
 #slide-2 table,  #slide-3 table,  #slide-4 table,  #slide-5 table,  #slide-6 table,  #slide-7 table,
 #slide-8 table,  #slide-9 table,  #slide-10 table, #slide-11 table,
-#slide-12 table, #slide-13 table, #slide-17 table, #slide-18 table, #slide-20 table,
-#slide-22 table, #slide-23 table, #slide-24 table, #slide-25 table { font-size: 0.88em; }
+#slide-12 table, #slide-13 table, #slide-16 table, #slide-17 table, #slide-18 table, #slide-20 table,
+#slide-22 table, #slide-23 table, #slide-24 table { font-size: 0.88em; }
 
 /* Slide 5 compact table — 10% size reduction */
 #slide-5 table { font-size: 0.79em; }
@@ -1428,13 +1417,13 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 /* th / td padding */
 #slide-2 th,  #slide-3 th,  #slide-4 th,  #slide-5 th,  #slide-6 th,  #slide-7 th,
 #slide-8 th,  #slide-9 th,  #slide-10 th, #slide-11 th,
-#slide-12 th, #slide-13 th, #slide-17 th, #slide-18 th, #slide-20 th,
-#slide-22 th, #slide-23 th, #slide-24 th, #slide-25 th { padding: 0.7em 0.9em; }
+#slide-12 th, #slide-13 th, #slide-16 th, #slide-17 th, #slide-18 th, #slide-20 th,
+#slide-22 th, #slide-23 th, #slide-24 th { padding: 0.7em 0.9em; }
 
 #slide-2 td,  #slide-3 td,  #slide-4 td,  #slide-5 td,  #slide-6 td,  #slide-7 td,
 #slide-8 td,  #slide-9 td,  #slide-10 td, #slide-11 td,
-#slide-12 td, #slide-13 td, #slide-17 td, #slide-18 td, #slide-20 td,
-#slide-22 td, #slide-23 td, #slide-24 td, #slide-25 td { padding: 0.65em 0.9em; }
+#slide-12 td, #slide-13 td, #slide-16 td, #slide-17 td, #slide-18 td, #slide-20 td,
+#slide-22 td, #slide-23 td, #slide-24 td { padding: 0.65em 0.9em; }
 
 /* Slide 5 compact table padding — 10% reduction */
 #slide-5 th { padding: 0.63em 0.81em; }
@@ -1443,7 +1432,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 /* Cards */
 #slide-2 .card,  #slide-3 .card,  #slide-4 .card,  #slide-6 .card,  #slide-7 .card,  #slide-9 .card,
 #slide-12 .card, #slide-13 .card, #slide-15 .card, #slide-17 .card, #slide-18 .card, #slide-20 .card,
-#slide-22 .card, #slide-23 .card, #slide-24 .card, #slide-25 .card { padding: 1em 1.1em; }
+#slide-22 .card, #slide-23 .card, #slide-24 .card { padding: 1em 1.1em; }
 
 /* Outline list */
 #slide-2 .outline-list li { padding: 1em 1.2em; font-size: 1em; }
@@ -1451,7 +1440,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 /* Bullet list items */
 #slide-3 .bullet-list li,  #slide-4 .bullet-list li,  #slide-6 .bullet-list li,  #slide-7 .bullet-list li,  #slide-9 .bullet-list li,
 #slide-11 .bullet-list li, #slide-13 .bullet-list li, #slide-18 .bullet-list li, #slide-20 .bullet-list li,
-#slide-22 .bullet-list li, #slide-23 .bullet-list li, #slide-24 .bullet-list li, #slide-25 .bullet-list li { font-size: 1em; margin-bottom: 0.7em; }
+#slide-22 .bullet-list li, #slide-23 .bullet-list li, #slide-24 .bullet-list li { font-size: 1em; margin-bottom: 0.7em; }
 
 /* ── Per-element entrance animations ── */
 
@@ -1529,7 +1518,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
 
 /* ══════════════════════════════════════════════════════════════════════
    MOBILE-FIRST RESPONSIVE DESIGN
-   Global mobile optimization for all 25 slides (screens < 768px)
+   Global mobile optimization for all 24 slides (screens < 768px)
    ══════════════════════════════════════════════════════════════════════ */
 
 /* ── 0. GLOBAL CONTAINER FIXES FOR MOBILE SCROLL ── */
@@ -1600,7 +1589,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
      FORCE ALL CONTENT VISIBLE - Override animation opacity states
      ═══════════════════════════════════════════════════════════════════ */
   
-  /* Force visibility for all slides and their children (Slides 2-25) */
+  /* Force visibility for all slides and their children (Slides 2-24) */
   .slide,
   .slide * {
     opacity: 1 !important;
@@ -2225,60 +2214,127 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
   }
   
   /* ── SLIDE 9 SPECIFIC: Manifest File and Dataset Split Strategy ── */
-  #slide-9 .grid-2 {
-    grid-template-columns: 1fr !important;
-    gap: 20px;
+  /* Container and layout */
+  #slide-9 .slide-inner {
+    padding: 10px !important;
+    max-width: 100% !important;
   }
   
+  #slide-9 .slide-header {
+    margin-bottom: 12px !important;
+    padding: 0 5px !important;
+  }
+  
+  #slide-9 .slide-body {
+    padding: 0 5px !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  
+  #slide-9 .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+  
+  /* Text wrapping and overflow prevention */
+  #slide-9 * {
+    word-break: break-word !important;
+    hyphens: auto !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  /* Card styling */
   #slide-9 .card {
     padding: 10px 12px;
+    margin: 0 !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
   }
   
   #slide-9 .card h3 {
-    font-size: 0.85rem;
-    margin-bottom: 6px;
+    font-size: 0.75rem !important;
+    margin-bottom: 6px !important;
+    line-height: 1.4;
+    word-break: break-word !important;
   }
   
   #slide-9 .card p {
-    font-size: 0.78rem;
+    font-size: 0.68rem !important;
     line-height: 1.5;
+    word-break: break-word !important;
+    hyphens: auto !important;
   }
   
+  /* Section headings - 30% reduction from base */
   #slide-9 h3 {
-    font-size: 0.9rem !important;
-    margin-bottom: 10px !important;
+    font-size: 0.78rem !important;
+    margin-bottom: 8px !important;
+    line-height: 1.4;
+    word-break: break-word !important;
+  }
+  
+  /* Bullet lists - 30% reduction */
+  #slide-9 .bullet-list {
+    margin: 8px 0 !important;
+    padding: 0 !important;
   }
   
   #slide-9 .bullet-list li {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
     line-height: 1.5;
     margin-bottom: 8px;
-    padding-left: 16px;
+    padding-left: 14px !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
   }
   
   #slide-9 .bullet-list li strong {
-    font-size: 0.8rem;
+    font-size: 0.7rem !important;
+    word-break: normal !important;
   }
   
+  /* Table container */
   #slide-9 .table-wrap {
     overflow-x: auto !important;
-    font-size: 0.7rem;
+    margin: 10px 0 !important;
+    padding: 0 !important;
+    -webkit-overflow-scrolling: touch;
   }
   
+  /* Table styling - 30% reduction */
   #slide-9 table {
-    min-width: 550px;
-    font-size: 0.7rem !important;
+    min-width: 520px;
+    width: max-content;
+    font-size: 0.63rem !important;
   }
   
   #slide-9 th {
-    padding: 7px 8px !important;
-    font-size: 0.7rem !important;
+    padding: 6px 7px !important;
+    font-size: 0.63rem !important;
+    line-height: 1.3;
+    word-break: keep-all !important;
+    white-space: nowrap;
   }
   
   #slide-9 td {
-    padding: 6px 8px !important;
-    font-size: 0.68rem !important;
+    padding: 5px 7px !important;
+    font-size: 0.61rem !important;
     line-height: 1.4;
+    word-break: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  /* Ensure column content wraps properly */
+  #slide-9 td:nth-child(1),
+  #slide-9 td:nth-child(4) {
+    white-space: nowrap;
+  }
+  
+  #slide-9 td:nth-child(2),
+  #slide-9 td:nth-child(3) {
+    word-break: break-word !important;
+    hyphens: auto !important;
+    max-width: 180px;
   }
   
   /* ── SLIDE 17 SPECIFIC: Loss Functions ── */
@@ -2413,8 +2469,7 @@ td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: 
   #slide-20 .slide-inner,
   #slide-22 .slide-inner,
   #slide-23 .slide-inner,
-  #slide-24 .slide-inner,
-  #slide-25 .slide-inner {
+  #slide-24 .slide-inner {
     font-size: 14px !important;
   }
 }
