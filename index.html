@@ -709,7 +709,7 @@
   <div>
     <h3 style="color:var(--primary);margin-bottom:12px;">Classification &mdash; Focal Loss with Label Smoothing</h3>
     <ul class="bullet-list">
-      <li><strong>Focal Loss:</strong> L_focal = (1 - p_t)^&gamma; &times; CE(p, y), with &gamma;=2.0</li>
+      <li><strong>Focal Loss:</strong> Focusing on hard-to-classify samples.</li>
       <li><strong>Label smoothing:</strong> &epsilon;=0.05 (true class probability = 0.95)</li>
       <li><strong>Class-weighted alpha:</strong> inversely proportional to class frequency</li>
       <li><strong>Multi-stream loss:</strong> main logits &times; 1.0 + image auxiliary head &times; 0.35</li>
